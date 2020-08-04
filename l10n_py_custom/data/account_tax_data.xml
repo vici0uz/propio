@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="ITAX_10" model="account.tax.template">
+        <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        <field name="name">IVA 10% Venta</field>
+        <field name="amount">10</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="price_include">True</field>
+        <field name="refund_account_id" ref="213100"/>
+        <field name="account_id" ref="213100"/>
+    </record>
+
+    <record id="OTAX_10" model="account.tax.template">
+        <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        <field name="name">IVA 10% Compra</field>
+        <field name="amount">10</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="price_include">True</field>
+        <field name="refund_account_id" ref="101300"/>
+        <field name="account_id" ref="101300"/>
+    </record>
+
+    <record id="ITAX_5" model="account.tax.template">
+        <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        <field name="name">IVA 5% Venta</field>
+        <field name="amount">5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="price_include">True</field>
+        <field name="refund_account_id" ref="213100"/>
+        <field name="account_id" ref="213100"/>
+    </record>
+
+    <record id="OTAX_5" model="account.tax.template">
+        <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        <field name="name">IVA 5% Compra</field>
+        <field name="amount">5</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="price_include">True</field>
+        <field name="refund_account_id" ref="101300"/>
+        <field name="account_id" ref="101300"/>
+    </record>
+
+    <record id="ITAX_EXE" model="account.tax.template">
+        <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        <field name="name">Exenta</field>
+        <field name="amount">0</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">purchase</field>
+        <field name="price_include">True</field>
+    </record>
+
+    <record id="OTAX_EXE" model="account.tax.template">
+        <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        <field name="name">Exenta</field>
+        <field name="amount">0</field>
+        <field name="amount_type">percent</field>
+        <field name="type_tax_use">sale</field>
+        <field name="price_include">True</field>
+    </record>
+
+</odoo>

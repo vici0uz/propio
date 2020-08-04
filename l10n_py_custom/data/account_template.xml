@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <!-- xiton_new_chart_template -->
+    <data noupdate="0">
+        <record id="101701" model="account.account.template">
+            <field name="name">Transferencia de Liquidez</field>
+            <field name="code">101701</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_liquidity" name="user_type_id"/>
+            <field name="reconcile" eval="True"/>
+        </record>
+
+        <record id="l10n_py_xiton_new_chart_template" model="account.chart.template">
+            <field name="name">Paraguay - Plan de Cuentas Revisión 1</field>
+            <field name="code_digits">6</field>
+            <field name="bank_account_code_prefix">11</field>
+            <field name="cash_account_code_prefix">12</field>
+            <field name="currency_id" ref="base.PYG"/>
+            <field name="transfer_account_code_prefix">101</field>
+            <field name="transfer_account_id" ref="101701"/>
+        </record>
+
+        <record id="101701" model="account.account.template">
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101000" model="account.account.template">
+            <field name="name">Activos Corrientes</field>
+            <field name="code">101000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101401" model="account.account.template">
+            <field name="name">Caja</field>
+            <field name="code">101401</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_liquidity" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101502" model="account.account.template">
+            <field name="name">Banco I</field>
+            <field name="code">101502</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_liquidity" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101503" model="account.account.template">
+            <field name="name">Banco II</field>
+            <field name="code">101503</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_liquidity" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101504" model="account.account.template">
+            <field name="name">Banco III</field>
+            <field name="code">101504</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_liquidity" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101600" model="account.account.template">
+            <field name="name">Cheques sin depositar</field>
+            <field name="code">101600</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_liquidity" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101610" model="account.account.template">
+            <field name="name">Tarjetas de crédito</field>
+            <field name="code">101610</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_credit_card" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101120" model="account.account.template">
+            <field name="name">Cuenta provisional de existencias (recibida)</field>
+            <field name="code">101120</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101130" model="account.account.template">
+            <field name="name">Cuenta provisional de existencias (entregada)</field>
+            <field name="code">101130</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101140" model="account.account.template">
+            <field name="name">Materias Primas</field>
+            <field name="code">101140</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101150" model="account.account.template">
+            <field name="name">Mercaderias entregadas pero no facturadas</field>
+            <field name="code">101150</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101160" model="account.account.template">
+            <field name="name">Productos en Curso de Elaboración</field>
+            <field name="code">101160</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101170" model="account.account.template">
+            <field name="name">Productos Elaborados</field>
+            <field name="code">101170</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101180" model="account.account.template">
+            <field name="name">Materiales Varios</field>
+            <field name="code">101180</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101200" model="account.account.template">
+            <field name="name">Cuentas por cobrar - Clientes</field>
+            <field name="code">101200</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_receivable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101600" model="account.account.template">
+            <field name="name">Cheques sin depositar</field>
+            <field name="code">101600</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_liquidity" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101610" model="account.account.template">
+            <field name="name">Tarjetas de crédito</field>
+            <field name="code">101610</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_credit_card" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101110" model="account.account.template">
+            <field name="name">Cuenta de valoración de stocks</field>
+            <field name="code">101110</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101120" model="account.account.template">
+            <field name="name">Cuenta provisional de existencias (recibida)</field>
+            <field name="code">101120</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101130" model="account.account.template">
+            <field name="name">Cuenta provisional de existencias (entregada)</field>
+            <field name="code">101130</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101140" model="account.account.template">
+            <field name="name">Materias Primas</field>
+            <field name="code">101140</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101150" model="account.account.template">
+            <field name="name">Mercaderias entregadas pero no facturadas</field>
+            <field name="code">101150</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101160" model="account.account.template">
+            <field name="name">Productos en Curso de Elaboración</field>
+            <field name="code">101160</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101170" model="account.account.template">
+            <field name="name">Productos Elaborados</field>
+            <field name="code">101170</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101180" model="account.account.template">
+            <field name="name">Materiales Varios</field>
+            <field name="code">101180</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101200" model="account.account.template">
+            <field name="name">Cuentas por cobrar - Clientes</field>
+            <field name="code">101200</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_receivable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101210" model="account.account.template">
+            <field name="name">Creditos por Ventas/ Deudores Morosos</field>
+            <field name="code">101210</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_receivable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101220" model="account.account.template">
+            <field name="name">Créditos por Ventas/ Deudores en Gestión Judicial</field>
+            <field name="code">101220</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_receivable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101230" model="account.account.template">
+            <field name="name">Créditos por Ventas/ Deudores Varios</field>
+            <field name="code">101230</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_receivable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101290" model="account.account.template">
+            <field name="name">Créditos por Ventas/(-) Previsión para Ds. Incobrables</field>
+            <field name="code">101290</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_receivable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101300" model="account.account.template">
+            <field name="name">Otros Créditos/ IVA Compra</field>
+            <field name="code">101300</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101301" model="account.account.template">
+            <field name="name">Otros Créditos/ Prestamos Otorgados</field>
+            <field name="code">101301</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_receivable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101302" model="account.account.template">
+            <field name="name">Creditos por Ventas/ Deudores por Ventas</field>
+            <field name="code">101302</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_receivable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101303" model="account.account.template">
+            <field name="name">Otros Créditos/ Anticipos a Proveedores</field>
+            <field name="code">101303</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_receivable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101304" model="account.account.template">
+            <field name="name">Otros Créditos/ Anticipo de Impuestos</field>
+            <field name="code">101304</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_receivable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101305" model="account.account.template">
+            <field name="name">Otros Créditos/ Anticipo al Personal</field>
+            <field name="code">101305</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_receivable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="101701" model="account.account.template">
+            <field name="name">Transferencia de liquidez</field>
+            <field name="code">101701</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="102000" model="account.account.template">
+            <field name="name">Activos no corrientes</field>
+            <field name="code">102000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_non_current_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="102100" model="account.account.template">
+            <field name="name">Pagos anticipados</field>
+            <field name="code">102100</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_prepayments" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="102101" model="account.account.template">
+            <field name="name">Intereses pagados por adelantado</field>
+            <field name="code">102101</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_prepayments" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="103000" model="account.account.template">
+            <field name="name">Cuenta de Activo Fijo</field>
+            <field name="code">103000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="103100" model="account.account.template">
+            <field name="name">Bienes de Uso/ Inmuebles</field>
+            <field name="code">103100</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="103200" model="account.account.template">
+            <field name="name">Bienes de Uso/ Maquinaria</field>
+            <field name="code">103200</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="103300" model="account.account.template">
+            <field name="name">Bienes de Uso/ Equipos</field>
+            <field name="code">103300</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="103400" model="account.account.template">
+            <field name="name">Bienes de Uso/ Rodados</field>
+            <field name="code">103400</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="103900" model="account.account.template">
+            <field name="name">Bienes de Uso/ (-) Depreciación Acumulada</field>
+            <field name="code">103900</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_fixed_assets" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="211000" model="account.account.template">
+            <field name="name">Pasivo circulante</field>
+            <field name="code">211000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="211100" model="account.account.template">
+            <field name="name">Cuenta por Pagar</field>
+            <field name="code">211100</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_payable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="211101" model="account.account.template">
+            <field name="name">Deudas Comerciales/ Proveedores</field>
+            <field name="code">211101</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_payable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="211102" model="account.account.template">
+            <field name="name">Deudas Comerciales/ Anticipos de Clientes</field>
+            <field name="code">211102</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_payable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="211103" model="account.account.template">
+            <field name="name">Deudas Comerciales/ (-) Intereses a Devengar por Compras al Credito</field>
+            <field name="code">211103</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_payable" name="user_type_id"/>
+            <field name="reconcile">1</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="212000" model="account.account.template">
+            <field name="name">Deudas bancarias</field>
+            <field name="code">212000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="212100" model="account.account.template">
+            <field name="name">Deudas Bancarias y Financieras/ Adelantos en Cuenta Corriente</field>
+            <field name="code">212100</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="212200" model="account.account.template">
+            <field name="name">Deudas Bancarias y Financieras/ Prestamos</field>
+            <field name="code">212200</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="212300" model="account.account.template">
+            <field name="name">Deudas Bancarias y Financieras/ Intereses a Pagar</field>
+            <field name="code">212300</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="213000" model="account.account.template">
+            <field name="name">Impuesto Recibido</field>
+            <field name="code">213000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="213100" model="account.account.template">
+            <field name="name">Deudas Fiscales/ IVA a Pagar</field>
+            <field name="code">213100</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="213200" model="account.account.template">
+            <field name="name">Deudas Fiscales/ Impuesto a la Renta a Pagar-IRACIS</field>
+            <field name="code">213200</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="213300" model="account.account.template">
+            <field name="name">Deudas Fiscales/ Impuesto a la Renta Pequeño Contribuyente a Pagar</field>
+            <field name="code">213300</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="213000" model="account.account.template">
+            <field name="name">Deudas Fiscales/ Impuesto a la Renta Personal a Pagar</field>
+            <field name="code">213000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="214000" model="account.account.template">
+            <field name="name">Deudas Sociales/ Sueldos a Pagar</field>
+            <field name="code">214000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="214100" model="account.account.template">
+            <field name="name">Deudas Sociales/ IPS a Pagar</field>
+            <field name="code">214100</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="214200" model="account.account.template">
+            <field name="name">Deudas Sociales/ Provisión para Aguinaldo</field>
+            <field name="code">214200</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="214300" model="account.account.template">
+            <field name="name">Deudas Sociales/ Retenciones a Depositar</field>
+            <field name="code">214300</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="215000" model="account.account.template">
+            <field name="name">Otras Deudas/ Acreedores Varios</field>
+            <field name="code">215000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_current_liabilities" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="300100" model="account.account.template">
+            <field name="name">Capital social/ Capital Suscripto</field>
+            <field name="code">300100</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="300200" model="account.account.template">
+            <field name="name">Capital social/ Dividendos a Distribuir en Acciones</field>
+            <field name="code">300200</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_liquidity" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="300290" model="account.account.template">
+            <field name="name">Capital social/ (-) Descuento de Emision de Acciones</field>
+            <field name="code">300290</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="300300" model="account.account.template">
+            <field name="name">Reserva Legal</field>
+            <field name="code">300300</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="300310" model="account.account.template">
+            <field name="name">Reserva de Revaluo de Activo Fijo</field>
+            <field name="code">300310</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="300400" model="account.account.template">
+            <field name="name">Resultados del Ejercicio</field>
+            <field name="code">300400</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="300410" model="account.account.template">
+            <field name="name">Resultados Acumulados</field>
+            <field name="code">300410</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_liquidity" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="344000" model="account.account.template">
+            <field name="name">Resultados Acumulados del Ejercicio Anterior</field>
+            <field name="code">344000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="400000" model="account.account.template">
+            <field name="name">Venta de productos</field>
+            <field name="code">400000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_revenue" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="400100" model="account.account.template">
+            <field name="name">Ventas - Mercaderias  Categoria  01</field>
+            <field name="code">400100</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_revenue" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="400200" model="account.account.template">
+            <field name="name">Ventas - Mercaderias  Categoria  02</field>
+            <field name="code">400200</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_revenue" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="400900" model="account.account.template">
+            <field name="name">Desc. Bonificaciones Recibidas</field>
+            <field name="code">400900</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_revenue" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="410000" model="account.account.template">
+            <field name="name">Dif. Por Venta De Producto</field>
+            <field name="code">410000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_other_income" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="410100" model="account.account.template">
+            <field name="name">Intereses ganados, obtenidos, percibidos</field>
+            <field name="code">410100</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_other_income" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="410100" model="account.account.template">
+            <field name="name">Intereses ganados, obtenidos, percibidos</field>
+            <field name="code">410100</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_other_income" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="410200" model="account.account.template">
+            <field name="name">Alquileres ganados, obtenidos, percibidos</field>
+            <field name="code">410200</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_other_income" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="410300" model="account.account.template">
+            <field name="name">Comisiones ganadas, obtenidas, percibidas</field>
+            <field name="code">410300</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_other_income" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="410400" model="account.account.template">
+            <field name="name">Descuentos ganados, obtenidos, percibidos</field>
+            <field name="code">410400</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_other_income" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="410500" model="account.account.template">
+            <field name="name">Honorarios ganados, obtenidos, percibidos</field>
+            <field name="code">410500</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_other_income" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="426000" model="account.account.template">
+            <field name="name">Ganancia Venta de Bienes de Uso</field>
+            <field name="code">426000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_other_income" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="427000" model="account.account.template">
+            <field name="name">Donaciones obtenidas, ganadas, percibidas</field>
+            <field name="code">427000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_other_income" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="428000" model="account.account.template">
+            <field name="name">Diferencia de cambio</field>
+            <field name="code">428000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_other_income" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="420900" model="account.account.template">
+            <field name="name">Recupero de Deudores Incobrables</field>
+            <field name="code">420900</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_other_income" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="510000" model="account.account.template">
+            <field name="name">Costo de mercaderias vendidas</field>
+            <field name="code">510000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_direct_costs" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="511000" model="account.account.template">
+            <field name="name">Costo de Mercaderia Vendidas - Categoria de productos 01</field>
+            <field name="code">511000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_direct_costs" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="512000" model="account.account.template">
+            <field name="name">Costo de Mercaderia Vendidas - Categoria de productos 02</field>
+            <field name="code">512000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_direct_costs" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="512100" model="account.account.template">
+            <field name="name">Gastos por diferencia de cambio</field>
+            <field name="code">512100</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="513000" model="account.account.template">
+            <field name="name">Costos de Producción</field>
+            <field name="code">513000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="514000" model="account.account.template">
+            <field name="name">Gastos de Administración</field>
+            <field name="code">514000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="514100" model="account.account.template">
+            <field name="name">Gastos en Sueldos y Jornales</field>
+            <field name="code">514100</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="514200" model="account.account.template">
+            <field name="name">Gastos en Servicios Publicos</field>
+            <field name="code">514200</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="514300" model="account.account.template">
+            <field name="name">Gastos en Publicidad y Propaganda</field>
+            <field name="code">514300</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="514400" model="account.account.template">
+            <field name="name">Gastos de Comercialización</field>
+            <field name="code">514400</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="515000" model="account.account.template">
+            <field name="name">Gastos Financieros</field>
+            <field name="code">515000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="515100" model="account.account.template">
+            <field name="name">Gastos Bancarios</field>
+            <field name="code">515100</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="516000" model="account.account.template">
+            <field name="name">Gastos en Impuestos</field>
+            <field name="code">516000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="519000" model="account.account.template">
+            <field name="name">Perdida Venta Bienes de Uso</field>
+            <field name="code">519000</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="519900" model="account.account.template">
+            <field name="name">Gastos en Depreciación de Bienes de Uso</field>
+            <field name="code">519900</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_account_type_expenses" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <record id="999999" model="account.account.template">
+            <field name="name">Perdidas / Ganancias no Distribuidas</field>
+            <field name="code">999999</field>
+            <field name="reconcile" eval="True"/>
+            <field ref="account.data_unaffected_earnings" name="user_type_id"/>
+            <field name="reconcile">0</field>
+            <field name="chart_template_id" ref="l10n_py_xiton_new_chart_template"/>
+        </record>
+
+        <!-- <record id="l10n_py_xiton_new_chart_template" model="account.chart.template"> -->
+                <!-- CUENTA CLIENTES -->
+                <!-- <field name="property_account_receivable_id" ref="101302"/> -->
+                <!-- CUENTA PROVEEDORES -->
+                <!-- <field name="property_account_payable_id" ref="211101"/> -->
+                <!-- CUENTA DE GASTOS EN CATEGORIAS DE PRODUCTOS -->
+                <!-- <field name="property_account_expense_categ_id" ref="510000"/> -->
+                <!-- CUENTA DE INGRESOS EN CATEGORIAS DE PRODUCTOS -->
+                <!-- <field name="property_account_income_categ_id" ref="400100"/> -->
+                <!-- CUENTA DEUDORA DIARIO CAMBIO DE DIVISAS -->
+                <!-- <field name="expense_currency_exchange_account_id" ref="512100"/> -->
+                <!-- CUENTA HABER DIARIO DE CAMBIO DE DIVISAS -->
+                <!-- <field name="income_currency_exchange_account_id" ref="428000"/> -->
+                <!-- ENTRADA DE MERCADERIAS-->
+                <!-- <field name="property_stock_account_input_categ_id" ref="101120"/> -->
+                <!-- SALIDA DE MERCADERIAS -->
+                <!-- <field name="property_stock_account_output_categ_id" ref="101130"/> -->
+                <!-- CUENTA VALORACIÓN DE INVENTARIO -->
+                <!-- <field name="property_stock_valuation_account_id" ref="101110"/> -->
+            <!-- </record> -->
+    </data>
+</odoo>

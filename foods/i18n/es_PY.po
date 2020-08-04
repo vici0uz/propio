@@ -1,0 +1,67 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* foods
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-22 22:39+0000\n"
+"PO-Revision-Date: 2020-07-22 18:40-0400\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es_PY\n"
+"X-Generator: Poedit 2.1.1\n"
+
+#. module: foods
+#: model:ir.model.fields,help:foods.field_product_product__type
+#: model:ir.model.fields,help:foods.field_product_template__type
+msgid ""
+"A storable product is a product for which you manage stock. The Inventory app has to be installed.\n"
+"A consumable product is a product for which stock is not managed.\n"
+"A service is a non-material product you provide."
+msgstr ""
+"Un producto almacenable es un producto para el que gestiona stock. La aplicación de inventario debe estar instalada.\n"
+"Un producto consumible es un producto para el que no se gestionan las existencias.\n"
+"Un servicio es un producto no material."
+
+#. module: foods
+#: model:ir.model.fields,field_description:foods.field_product_product__avaliable_4_cooking
+#: model:ir.model.fields,field_description:foods.field_product_template__avaliable_4_cooking
+msgid "Avaliable"
+msgstr "Disponible"
+
+#. module: foods
+#: selection:product.template,type:0
+msgid "Consumable"
+msgstr "Consumible"
+
+#. module: foods
+#: selection:product.template,type:0
+msgid "Cook"
+msgstr "Cocinar"
+
+#. module: foods
+#: model:ir.model,name:foods.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: foods
+#: model:ir.model.fields,field_description:foods.field_product_product__type
+#: model:ir.model.fields,field_description:foods.field_product_template__type
+msgid "Product Type"
+msgstr "Tipo de producto"
+
+#. module: foods
+#: selection:product.template,type:0
+msgid "Service"
+msgstr "Servicio"
+
+#. module: foods
+#: selection:product.template,type:0
+msgid "Storable Product"
+msgstr "Almacenable"
