@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-22 22:39+0000\n"
-"PO-Revision-Date: 2020-07-22 18:40-0400\n"
+"POT-Creation-Date: 2020-08-04 16:21+0000\n"
+"PO-Revision-Date: 2020-08-04 12:24-0400\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: es_PY\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #. module: foods
 #: model:ir.model.fields,help:foods.field_product_product__type
@@ -46,6 +46,21 @@ msgid "Cook"
 msgstr "Cocinar"
 
 #. module: foods
+#: model_terms:ir.actions.act_window,help:foods.foods_sale_voucher_action
+msgid "Create a new voucher."
+msgstr "Crear un nuevo vale."
+
+#. module: foods
+#: model:ir.model.fields,field_description:foods.field_sale_order__type
+msgid "Document type"
+msgstr "Tipo"
+
+#. module: foods
+#: model:ir.model.fields,field_description:foods.field_sale_order__date_order
+msgid "Order Date"
+msgstr "Fecha entrega"
+
+#. module: foods
 #: model:ir.model,name:foods.model_product_template
 msgid "Product Template"
 msgstr "Plantilla de producto"
@@ -57,6 +72,11 @@ msgid "Product Type"
 msgstr "Tipo de producto"
 
 #. module: foods
+#: model:ir.model,name:foods.model_sale_order selection:sale.order,type:0
+msgid "Sale Order"
+msgstr "Pedido de venta"
+
+#. module: foods
 #: selection:product.template,type:0
 msgid "Service"
 msgstr "Servicio"
@@ -65,3 +85,14 @@ msgstr "Servicio"
 #: selection:product.template,type:0
 msgid "Storable Product"
 msgstr "Almacenable"
+
+#. module: foods
+#: selection:sale.order,type:0
+msgid "Voucher"
+msgstr "Vale"
+
+#. module: foods
+#: model:ir.actions.act_window,name:foods.foods_sale_voucher_action
+#: model:ir.ui.menu,name:foods.foods_sale_voucher_menu
+msgid "Vouchers"
+msgstr "Vales"
