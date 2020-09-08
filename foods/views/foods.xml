@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="assets_backend" name="foods assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/foods/static/src/scss/foods.scss"/>
+                <!-- <script type="text/javascript" src="/xiton_common/static/src/js/credit_line.js"/> -->
+            </xpath>
+        </template>
+
+    </data>
+</odoo>
