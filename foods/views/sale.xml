@@ -8,6 +8,7 @@
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
                 <field name="type" invisible="1"/>
+                <field name="hora_de_entrega" widget="timepicker"/>
             </xpath>
         </field>
     </record>

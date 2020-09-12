@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cocina_orden,access_cocina_orden,model_cocina_orden,base.group_user,1,1,1,1
+access_cocina_order_linea,access_cocina_orden_linea,model_cocina_orden_linea,base.group_user,1,1,1,1

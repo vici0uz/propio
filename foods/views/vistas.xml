@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+    <!-- Ordenes -->
+        <record id="orden_cocina_form" model="ir.ui.view">
+            <field name="name">cocina.orden.form</field>
+            <field name="model">cocina.orden</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="name"/>
+                        <field name="hora_de_entrega" widget="timepicker"/>
+                        <notebook>
+                            <page string="Items">
+                                <field name="linea_ids" widget="one2many">
+                                    <tree editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="qty"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="orden_cocina_tree" model="ir.ui.view">
+            <field name="name">cocina.orden.tree</field>
+            <field name="model">cocina.orden</field>
+            <field name="arch" type="xml">
+                <tree string="Ordenes de cocina">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="orden_cocina_act" model="ir.actions.act_window">
+            <field name="name">Orders</field>
+            <field name="res_model">cocina.orden</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+    <!-- Recetas -->
+
+        <record id="cocina_receta_form" model="ir.ui.view">
+            <field name="name">cocina.receta.form</field>
+            <field name="model">cocina.receta</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="name"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="cocina_receta_tree" model="ir.ui.view">
+            <field name="name">cocina.receta.tree</field>
+            <field name="model">cocina.receta</field>
+            <field name="arch" type="xml">
+                <tree string="Recipes">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="cocina_receta_act" model="ir.actions.act_window">
+            <field name="name">Recipes</field>
+            <field name="res_model">cocina.receta</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="foods_root_menu" name="Cocina" web_icon="foods,static/description/xiton_foods_alt.png" sequence="40"/>
+
+        <menuitem id="foods_cocina_menu" name="Cocina" parent="foods_root_menu"/>
+        <menuitem id="cocina_orden_menu" parent="foods_cocina_menu" action="orden_cocina_act"/>
+
+        <menuitem id="cocina_receta_menu" parent="foods_cocina_menu" action="cocina_receta_act"/>
+
+
+    </data>
+</odoo>

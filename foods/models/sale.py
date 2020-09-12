@@ -8,6 +8,8 @@ class SaleOrder(models.Model):
 
     type = fields.Selection([('voucher', 'Voucher'), ('order', 'Sale Order')], default='order', string='Document type')
     date_order = fields.Datetime(default=lambda self: fields.Datetime.now())
+    hora_de_entrega = fields.Float(string='Hora de entrega')
+
 
     @api.model
     def create(self, vals):
