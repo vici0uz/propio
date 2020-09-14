@@ -10,10 +10,11 @@ class cocina_orden(models.Model):
     hora_de_entrega = fields.Float(string='Hora de entrega')
     tiempo_transcurrido = fields.Float(string='Tiempo transcurrido')
     tiempo_restante = fields.Float(string='Tiempo restante')
-    completado = fields.Boolean(string='Completado')
+    completado = fields.Boolean(string='Completado', default=False)
     order_id = fields.Many2one(comodel_name='sale.order', string='Order', required=True)
     partner_id = fields.Many2one(comodel_name='res.partner', string='Partner', required=True)
     linea_ids = fields.One2many(comodel_name='cocina.orden.linea', inverse_name='cocina_orden_id')
+    prioridad = fields.Selection([('1', '1'), ('2', '2'), ('3', '3')], string='Prioridad')
 
 
 class cocina_orden_linea(models.Model):
@@ -28,6 +29,7 @@ class cocina_orden_linea(models.Model):
 class cocina_receta(models.Model):
     _name = 'cocina.receta'
 
+    active = fields.Boolean(string='Active', default=True)
     name = fields.Char(string='Name')
     product_tmpl_id = fields.Many2one(comodel_name='product.template')
     linea_ids = fields.One2many(comodel_name='cocina.receta.linea', inverse_name='cocina_receta_id')
@@ -37,5 +39,6 @@ class cocina_receta_linea(models.Model):
     _name = 'cocina.receta.linea'
 
     cocina_receta_id = fields.Many2one(comodel_name='cocina.receta')
-    product_tmpl_id = fields.Many2one(comodel_name='product.template')
+    product_tmpl_id = fields.Many2one(comodel_name='product.product')
+    qty = fields.Float(string='Quantity')
     uom_id = fields.Many2one(string='Quantity', comodel_name='uom.uom')

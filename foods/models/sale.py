@@ -9,7 +9,7 @@ class SaleOrder(models.Model):
     type = fields.Selection([('voucher', 'Voucher'), ('order', 'Sale Order')], default='order', string='Document type')
     date_order = fields.Datetime(default=lambda self: fields.Datetime.now())
     hora_de_entrega = fields.Float(string='Hora de entrega')
-
+    cocina_orden_id = fields.Many2one(comodel_name='cocina.orden')
 
     @api.model
     def create(self, vals):
@@ -21,3 +21,18 @@ class SaleOrder(models.Model):
                     vals['name'] = self.env['ir.sequence'].next_by_code('sale.order.voucher') or _('New')
         result = super(SaleOrder, self).create(vals)
         return result
+
+    @api.multi
+    def crear_orden_cocina(self):
+        for record in self:
+            if not record.cocina_orden_id:
+                vals = {
+                    'name': self.env['ir.sequence'].next_by_code('cocina.orden.secuencia'),
+                    'partner_id': record.partner_id.id,
+                    'hora_de_entrega': record.hora_de_entrega,
+                    'order_id': record.id
+                }
+                new_order = self.env['cocina.orden'].create(vals)
+                record.write({'cocina_orden_id': new_order.id})
+            else:
+                record.cocina_orden_id.unlink()
