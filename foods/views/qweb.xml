@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<!--     <t t-name="ImprimirTicketCocinaWidget">
+        <div class='receipt-screen screen'>
+            <div class='screen-content'>
+                <div class='top-content'>
+
+                    <span class='button back'>
+                        <i class='fa fa-angle-double-left'></i>
+                        Back
+                    </span>
+                </div>
+            </div>
+        </div>
+    </t> -->
+    <t t-name="ImprimirTicketCocinaWidget">
+        <div class='receipt-screen screen'>
+            <div class='screen-content'>
+                <div class='top-content'>
+                    <span class='button back'>
+                        <i class='fa fa-angle-double-left'></i>
+                        Back
+                    </span>
+                    <h1>Imprimir Orden de Cocina</h1>
+                    <span class='button next'>
+                        Ok
+                        <i class='fa fa-angle-double-right'></i>
+                    </span>
+                </div>
+                <div class="centered-content touch-scrollable">
+                    <div class="button print">
+                        <i class='fa fa-print'></i> Print
+                    </div>
+                    <div class="pos-receipt-container">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="CocinaTicket">
+        <div class="pos-sale-ticket">
+
+            <div class="pos-center-align"><t t-esc="order.formatted_validation_date"/> <t t-esc="order.name"/></div>
+            <br />
+            <t t-esc="widget.pos.company.name"/><br />
+            <!-- <div class="receipt-phone">
+                Phone: <t t-esc="widget.pos.company.phone || ''"/><br />
+            </div> -->
+            <div class="receipt-user">
+                User: <t t-esc="widget.pos.get_cashier().name"/><br />
+            </div>
+            <br />
+            <t t-if="receipt.header">
+                <div style='text-align:center'>
+                    <t t-esc="receipt.header" />
+                </div>
+                <br />
+            </t>
+            <table class='receipt-orderlines'>
+                <colgroup>
+                    <col width='50%' />
+                    <col width='25%' />
+                    <col width='25%' />
+                </colgroup>
+                <tr t-foreach="orderlines" t-as="orderline">
+                    <t t-if="orderline.get_product().type === 'cook'">
+                    <td>
+                        <t t-esc="orderline.get_product().display_name"/>
+                         <t t-if="orderline.get_discount() > 0">
+                            <div class="pos-disc-font">
+                                With a <t t-esc="orderline.get_discount()"/>% discount
+                            </div>
+                        </t>
+                    </td>
+                    <td class="pos-right-align">
+                        <t t-esc="orderline.get_quantity_str_with_unit()"/>
+                    </td>
+                    <!-- <td class="pos-right-align"> -->
+                    <!-- <t t-if="orderline.get_product().type === 'cook'"> -->
+
+                    <!-- </t>
+                    </td> -->
+                </t>
+                    <!-- <td class="pos-right-align">
+                        <t t-esc="widget.format_currency(orderline.get_display_price())"/>
+                    </td> -->
+                </tr>
+            </table>
+            <br />
+<!--             <table class='receipt-total'>
+                <tr>
+                    <td>Subtotal:</td>
+                    <td class="pos-right-align">
+                        <t t-esc="widget.format_currency(order.get_total_without_tax())"/>
+                    </td>
+                </tr>
+                <t t-foreach="order.get_tax_details()" t-as="taxdetail">
+                    <tr>
+                        <td><t t-esc="taxdetail.name" /></td>
+                        <td class="pos-right-align">
+                            <t t-esc="widget.format_currency(taxdetail.amount)" />
+                        </td>
+                    </tr>
+                </t>
+                <tr>
+                    <t t-if="order.get_total_discount() > 0">
+                        <td>Discount:</td>
+                        <td class="pos-right-align">
+                            <t t-esc="widget.format_currency(order.get_total_discount())"/>
+                        </td>
+                    </t>
+                </tr>
+                <tr class="emph">
+                    <td>Total:</td>
+                    <td class="pos-right-align">
+                        <t t-esc="widget.format_currency(order.get_total_with_tax())"/>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <table class='receipt-paymentlines'>
+                <t t-foreach="paymentlines" t-as="line">
+                  <tr>
+                      <td>
+                          <t t-esc="line.name"/>
+                      </td>
+                      <td class="pos-right-align">
+                          <t t-esc="widget.format_currency(line.get_amount())"/>
+                      </td>
+                  </tr>
+                </t>
+            </table>
+            <br />
+            <table class='receipt-change'>
+                <tr><td>Change:</td><td class="pos-right-align">
+                    <t t-esc="widget.format_currency(order.get_change())"/>
+                    </td></tr>
+            </table> -->
+            <!-- <t t-if="receipt.footer">
+                <br />
+                <div style='text-align:center'>
+                    <t t-esc="receipt.footer" />
+                </div>
+            </t> -->
+        </div>
+    </t>
+
+
+    <t t-name="ImprimirTicketCocinaBtn">
+        <!-- <span class="control-button" t-att-style='widget.is_visible() ? "display: block;" : "display: none;"'> -->
+        <span class="control-button">
+            <i class="fa fa-ticket"></i>
+            Ticket cocina
+        </span>
+    </t>
+
+</templates>

@@ -11,8 +11,9 @@
                     <sheet>
                         <div class="oe_title">
                         <h2>
+                        <field name="partner_id"/>
                         <field name="name" readonly="1"/>
-                    </h2>
+                        </h2>
 
                     </div>
                         <field name="hora_de_entrega" widget="timepicker"/>
@@ -59,7 +60,7 @@
                 <form>
                     <sheet>
                         <div class="oe_title">
-                            <field name="name"/>
+                            <field name="name" required="1"/>
                         </div>
                         <div class="oe_button_box" name="button_box">
                             <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
@@ -86,14 +87,14 @@
             <field name="name">cocina.receta.tree</field>
             <field name="model">cocina.receta</field>
             <field name="arch" type="xml">
-                <tree string="Recipes">
+                <tree string="Recetas">
                     <field name="name"/>
                 </tree>
             </field>
         </record>
 
         <record id="cocina_receta_act" model="ir.actions.act_window">
-            <field name="name">Recipes</field>
+            <field name="name">Recetas</field>
             <field name="res_model">cocina.receta</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
@@ -105,6 +106,7 @@
         <menuitem id="cocina_orden_menu" parent="foods_cocina_menu" action="orden_cocina_act"/>
 
         <menuitem id="cocina_receta_menu" parent="foods_cocina_menu" action="cocina_receta_act"/>
+
 
 
     </data>

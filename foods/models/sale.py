@@ -36,3 +36,21 @@ class SaleOrder(models.Model):
                 record.write({'cocina_orden_id': new_order.id})
             else:
                 record.cocina_orden_id.unlink()
+
+    @api.multi
+    def mostrar_orden(self):
+        for record in self:
+            if record.cocina_orden_id:
+                view = self.env.ref('foods.orden_cocina_form')
+                ventana = {
+                    'type': 'ir.actions.act_window',
+                    'name': 'Orden',
+                    'res_model': 'cocina.orden',
+                    'view_type': 'form',
+                    'view_mode': 'form',
+                    'view_id': view.id,
+                    'target': 'new',
+                    'context': {'current_id': record.cocina_orden_id.id}
+                }
+
+                return ventana

@@ -19,6 +19,11 @@
                 <button name="crear_orden_cocina" type="object" string="Crear orden"/>
             </xpath>
 
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button type="object" class="oe_stat_button" name="mostrar_orden" icon="fa-ticket">
+                </button>
+            </xpath>
+
         </field>
     </record>
 
