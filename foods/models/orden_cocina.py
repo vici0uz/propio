@@ -47,6 +47,7 @@ class cocina_orden(models.Model):
             "orden_cocina_id": orden_cocina.id,
         }
 
+
 class cocina_orden_linea(models.Model):
     _name = 'cocina.orden.linea'
 
@@ -70,7 +71,7 @@ class cocina_receta(models.Model):
 
     active = fields.Boolean(string='Active', default=True)
     name = fields.Char(string='Name')
-    product_tmpl_id = fields.Many2one(comodel_name='product.template')
+    product_tmpl_id = fields.Many2many(comodel_name='product.template', relation='product_tmpl_receta_rel', column1='product_id', column2='receta_id', string='Productos')
     linea_ids = fields.One2many(comodel_name='cocina.receta.linea', inverse_name='cocina_receta_id')
 
 

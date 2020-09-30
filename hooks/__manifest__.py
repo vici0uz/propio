@@ -1,7 +1,9 @@
 {
     'name': 'My module',
     'author': 'Alan Martínez',
-    'depends': ['sale',
+    'depends': [
+                'product',
+                'sale',
                 'sale_management',
                 'purchase',
                 'stock',
