@@ -9,6 +9,7 @@
         'security/ir.model.access.csv',
         'data/ir_sequence_data.xml',
         'views/sale.xml',
+        'views/product.xml',
         'views/foods.xml',
         'views/vistas.xml'],
     'qweb': [

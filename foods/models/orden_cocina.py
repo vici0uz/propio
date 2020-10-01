@@ -66,6 +66,7 @@ class cocina_orden_linea(models.Model):
             "qty": linea_data['qty']
         }
 
+
 class cocina_receta(models.Model):
     _name = 'cocina.receta'
 
@@ -82,3 +83,12 @@ class cocina_receta_linea(models.Model):
     product_tmpl_id = fields.Many2one(comodel_name='product.product')
     qty = fields.Float(string='Cantidad')
     uom_id = fields.Many2one(string='Unidad de medida', comodel_name='uom.uom')
+
+
+class cocina_producto(models.Model):
+    _name = 'cocina.producto'
+
+    # receta_ids = fields.Many2one(comodel_name='p')
+    pt_id = fields.Many2one(comodel_name='product.template', string='Product')
+    receta_id = fields.Many2one(comodel_name='cocina.receta', string='Receta')
+    qty = fields.Float(string='Quantity')

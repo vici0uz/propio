@@ -3,3 +3,4 @@ access_cocina_orden,access_cocina_orden,model_cocina_orden,base.group_user,1,1,1
 access_cocina_order_linea,access_cocina_orden_linea,model_cocina_orden_linea,base.group_user,1,1,1,1
 access_cocina_receta,access_cocina_receta,model_cocina_receta,base.group_user,1,1,1
 access_cocina_receta_linea,access_cocina_receta_linea,model_cocina_receta_linea,base.group_user,1,1,1,1
+access_cocina_product,access_cocina_producto,model_cocina_producto,base.group_user,1,1,1,1
