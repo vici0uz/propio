@@ -13,13 +13,18 @@
                     </header>
                     <sheet>
 
+                        <div class="oe_title">
                         <h1>
-                            <field name="no_serie" required="1"/>
+                            <label for="no_serie" class="oe_edit_only"/>
+                            <field name="no_serie" required="1" class="oe_inline"/>
                         </h1>
                         <h2>
+                            <label for="modelo" class="oe_edit_only"/>
                             <field name="modelo" options="{'no_create': True}" required="1"/>
 
                         </h2>
+                        </div>
+                        <label for="responsable"/>
                         <field name="responsable"/>
                         <group colspan="4">
                             <group>
