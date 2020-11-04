@@ -9,7 +9,24 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <field name="modelo" options="{'no_create': True}"/>
+                        <h1>
+                            <field name="no_serie" required="1"/>
+                        </h1>
+                        <h2>
+                            <field name="modelo" options="{'no_create': True}" required="1"/>
+
+                        </h2>
+                        <field name="responsable"/>
+                        <group colspan="4">
+                            <group>
+                                <field name="ultimo_operador"/>
+                                <field name="ultimo_lugar"/>
+                            </group>
+                            <group>
+                                <field name="ultimo_odometro"/>
+                                <field name="ultima_foto_odometro" widget='image'/>
+                            </group>
+                        </group>
                         <notebook>
                             <page string="Trabajos">
                                 <field name="trabajo_lineas_ids"/>
@@ -169,10 +186,14 @@
             <field name="name">maquinaria.trabajo.tree</field>
             <field name="model">maquinaria.trabajo.linea</field>
             <field name="arch" type="xml">
-                <tree string="Trabajos" editable="top">
+                <tree string="Trabajos" editable="top" default_order="fecha_trabajo asc">
+                <!-- <tree string="Trabajos" editable="top"> -->
+
+                    <field name="operador" required="1"/>
                     <field name="trabajo_destino" required="1"/>
                     <field name="odometro" required="1"/>
                     <field name="odometro_imagen" required="1"/>
+                    <field name="fecha_trabajo" required="1"/>
                 </tree>
             </field>
         </record>
