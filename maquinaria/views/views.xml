@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+    <!-- MAQUINA -->
+        <record id="maquinaria_maquina_form" model="ir.ui.view">
+            <field name="name">maquinaria.maquina.form</field>
+            <field name="model">maquinaria.maquina</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="modelo"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="maquinaria_maquina_tree" model="ir.ui.view">
+            <field name="name">maquinaria.maquina.tree</field>
+            <field name="model">maquinaria.maquina</field>
+            <field name="arch" type="xml">
+                <tree string="Maquinaria">
+                    <field name="modelo"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="maquinaria_maquina_act" model="ir.actions.act_window">
+            <field name="name">Maquinaria</field>
+            <field name="res_model">maquinaria.maquina</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <!-- <field name="arch" type="xml">
+            </field> -->
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Registrar una nueva maquina
+              <!-- </p><p> -->
+
+              </p>
+            </field>
+        </record>
+
+    <!-- MARCA -->
+        <record id="maquinaria_marca_form" model="ir.ui.view">
+            <field name="name">maquinaria.marca.form</field>
+            <field name="model">maquinaria.maquina.marca</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="name"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="maquinaria_marca_tree" model="ir.ui.view">
+            <field name="name">maquinaria.marca.tree</field>
+            <field name="model">maquinaria.maquina.marca</field>
+            <field name="arch" type="xml">
+                <tree string="Marca">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="maquinaria_marca_act" model="ir.actions.act_window">
+            <field name="name">Marca</field>
+            <field name="res_model">maquinaria.maquina.marca</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Registrar una nueva Marca
+              <!-- </p><p> -->
+
+              </p>
+            </field>
+        </record>
+    <!-- MODELO -->
+        <record id="maquinaria_modelo_form" model="ir.ui.view">
+            <field name="name">maquinaria.maquina.modelo.form</field>
+            <field name="model">maquinaria.maquina.modelo</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="name"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="maquinaria_modelo_tree" model="ir.ui.view">
+            <field name="name">maquinaria.maquina.modelo.tree</field>
+            <field name="model">maquinaria.maquina.modelo</field>
+            <field name="arch" type="xml">
+                <tree string="Modelo">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="maquinaria_modelo_act" model="ir.actions.act_window">
+            <field name="name">Modelo</field>
+            <field name="res_model">maquinaria.maquina.modelo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+           <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Registrar nuevos modelos
+              <!-- </p><p> -->
+
+              </p>
+            </field>
+        </record>
+
+    <!-- DESTINO -->
+        <record id="maquinaria_maquina_destino_form" model="ir.ui.view">
+            <field name="name">maquinaria.destino.form</field>
+            <field name="model">maquinaria.destino</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="name"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="maquinaria_maquina_tree" model="ir.ui.view">
+            <field name="name">maquinaria.destino.tree</field>
+            <field name="model">maquinaria.destino</field>
+            <field name="arch" type="xml">
+                <tree string="Lugar de trabajo">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="maquinaria_destino_act" model="ir.actions.act_window">
+            <field name="name">Destino</field>
+            <field name="res_model">maquinaria.destino</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <!-- <field name="arch" type="xml">
+            </field> -->
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Registrar un nuevo lugar de trabajo
+              <!-- </p><p> -->
+
+              </p>
+            </field>
+        </record>
+    <!-- MENUS -->
+        <menuitem id="maquinaria_menu_root" name="Maquinaria" web_icon="maquinaria,static/description/maquinaria.png" sequence="40"/>
+
+        <menuitem id="maquinaria_menu_level1" parent="maquinaria_menu_root" name="Registros"/>
+        <menuitem id="maquinaria_menu_level2" parent="maquinaria_menu_level1" action="maquinaria_maquina_act"/>
+
+        <menuitem id="maquinaria_menu_maquina_marca" parent="maquinaria_menu_level1" action="maquinaria_marca_act"/>
+
+        <menuitem id="maquinaria_menu_maquina_modelo" parent="maquinaria_menu_level1" action="maquinaria_modelo_act"/>
+
+        <menuitem id="maquinaria_menu_destino" parent="maquinaria_menu_level1" action="maquinaria_destino_act"/>
+    </data>
+</odoo>

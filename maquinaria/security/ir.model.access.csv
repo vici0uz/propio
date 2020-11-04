@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_maquinaria_maquina,access_maquinaria_maquina,model_maquinaria_maquina,base.group_user,1,1,1,1
+access_maquinaria_marca,access_maquinaria_marca,model_maquinaria_maquina_marca,base.group_user,1,1,1,1
+access_maquinaria_modelo,access_maquinaria_modelo,model_maquinaria_maquina_modelo,base.group_user,1,1,1,1
+access_maquinaria_destino,access_maquinaria_destino,model_maquinaria_destino,base.group_user,1,1,1,1
+access_maquinaria_trabajo_linea,access_maquinaria_trabajo_linea,model_maquinaria_trabajo_linea,base.group_user,1,1,1,1

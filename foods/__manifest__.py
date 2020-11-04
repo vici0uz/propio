@@ -2,6 +2,11 @@
     'name': 'Lo que sea',
     'version': '0.1',
     'depends': [
+        'product',
+        'sale',
+        'sale_management',
+        'purchase',
+        'stock',
         'sale',
         'hooks',
         'muk_web_client_refresh'],
