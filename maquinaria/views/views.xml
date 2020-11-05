@@ -79,7 +79,10 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <field name="name"/>
+                        <h1>
+                            <label for="name"/>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
                     </sheet>
                 </form>
             </field>
@@ -89,14 +92,14 @@
             <field name="name">maquinaria.marca.tree</field>
             <field name="model">maquinaria.maquina.marca</field>
             <field name="arch" type="xml">
-                <tree string="Marca">
+                <tree string="Marcas">
                     <field name="name"/>
                 </tree>
             </field>
         </record>
 
         <record id="maquinaria_marca_act" model="ir.actions.act_window">
-            <field name="name">Marca</field>
+            <field name="name">Marcas</field>
             <field name="res_model">maquinaria.maquina.marca</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
@@ -108,6 +111,7 @@
               </p>
             </field>
         </record>
+
     <!-- MODELO -->
         <record id="maquinaria_modelo_form" model="ir.ui.view">
             <field name="name">maquinaria.maquina.modelo.form</field>
@@ -150,7 +154,6 @@
             </field>
         </record>
 
-
     <!-- DESTINO -->
         <record id="maquinaria_maquina_destino_form" model="ir.ui.view">
             <field name="name">maquinaria.destino.form</field>
@@ -190,15 +193,13 @@
             </field>
         </record>
 
-    <!-- TRABAJo -->
+    <!-- TRABAJO -->
         <record id="maquinaria_trabajo_tree" model="ir.ui.view">
             <field name="name">maquinaria.trabajo.tree</field>
             <field name="model">maquinaria.trabajo.linea</field>
             <field name="arch" type="xml">
                 <tree string="Trabajos" editable="top" default_order="fecha_trabajo asc">
-                <!-- <tree string="Trabajos" editable="top"> -->
-
-                    <field name="operador" required="1"/>
+                    <field name="operador" required="1" domain="[('is_company','=',False)]"/>
                     <field name="trabajo_destino" required="1"/>
                     <field name="odometro" required="1"/>
                     <field name="odometro_imagen" required="1"/>
@@ -233,6 +234,7 @@
                 </form>
             </field>
         </record>
+
     <!-- MENUS -->
         <menuitem id="maquinaria_menu_root" name="Maquinaria" web_icon="maquinaria,static/description/maquinaria.png" sequence="40"/>
 
