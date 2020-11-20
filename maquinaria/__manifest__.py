@@ -6,5 +6,6 @@
         ],
     'data': [
         'security/ir.model.access.csv',
-        'views/views.xml']
+        'views/views.xml',
+        'wizards/registro_de_turnos.xml']
 }
