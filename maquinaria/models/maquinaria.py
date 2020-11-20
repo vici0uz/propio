@@ -80,17 +80,37 @@ class maquinaria_trabajo(models.Model):
     trabajo_destino = fields.Many2one(comodel_name='maquinaria.destino', string='Lugar')
     operador = fields.Many2one(comodel_name='res.partner')
     fecha_trabajo = fields.Date(default=fields.Date.context_today, string="Fecha")
+    cerrado = fields.Boolean(default=False)
 
+    # Apertura
+    odometro_inicial = fields.Integer()
+    odometro_inicial_imagen = fields.Binary(string='Odometro inicial', attachment=True)
+
+    # Final
+    odometro_final = fields.Integer()
+    odometro_final_imagen = fields.Binary(string='Odometro final', attachment=True)
+    horas_trabajadas = fields.Float()
+    notas = fields.Text(string='Description')
 
 class maquinaria_wizard(models.TransientModel):
     _name = 'maquinaria.wizard'
 
     maquina_id = fields.Many2one(comodel_name='maquinaria.maquina', ondelete='restrict')
-    odometro = fields.Integer()
-    odometro_imagen = fields.Binary(string='Foto del Odometro', attachment=True)
+
     trabajo_destino = fields.Many2one(comodel_name='maquinaria.destino', string='Lugar')
     operador = fields.Many2one(comodel_name='res.partner')
     fecha_trabajo = fields.Date(default=fields.Date.context_today, string="Fecha")
+
+
+    # Apertura
+    odometro_inicial = fields.Integer()
+    odometro_inicial_imagen = fields.Binary(string='Odometro inicial', attachment=True)
+
+    # Final
+    odometro_final = fields.Integer()
+    odometro_final_imagen = fields.Binary(string='Odometro final', attachment=True)
+    horas_trabajadas = fields.Float()
+    notas = fields.Text(string='Description')
 
     @api.multi
     def guardar_datos(self):
