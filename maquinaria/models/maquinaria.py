@@ -77,24 +77,21 @@ class maquinaria_trabajo(models.Model):
     _name = 'maquinaria.trabajo.linea'
 
     maquina_id = fields.Many2one(comodel_name='maquinaria.maquina', ondelete='restrict')
-    odometro = fields.Integer()
-    odometro_imagen = fields.Binary(string='Foto del Odometro', attachment=True)
-    trabajo_destino = fields.Many2one(comodel_name='maquinaria.destino', string='Lugar')
-    operador = fields.Many2one(comodel_name='res.partner')
+    trabajo_destino = fields.Many2one(comodel_name='maquinaria.destino', string='Lugar', ondelete='restrict')
+    operador = fields.Many2one(comodel_name='res.partner', ondelete='restrict')
     fecha_trabajo = fields.Date(default=fields.Date.context_today, string="Fecha")
     cerrado = fields.Boolean(default=False)
-    status = fields.Selection([('abierto', 'Abierto'), ('mitad', 'Mitad'), ('cerrado', 'Cerrado')], default='abierto')
+    status = fields.Selection([('abierto', 'Abierto'), ('cerrado', 'Cerrado')], default='abierto')
 
     # Apertura
-    odometro_inicial = fields.Integer()
+    odometro_inicial = fields.Float()
     odometro_inicial_imagen = fields.Binary(string='Odometro inicial', attachment=True)
 
     # Final
-    odometro_final = fields.Integer()
+    odometro_final = fields.Float()
     odometro_final_imagen = fields.Binary(string='Odometro final', attachment=True)
     horas_trabajadas = fields.Float()
     notas = fields.Text(string='Description')
-
 
     # Nuevos
 
