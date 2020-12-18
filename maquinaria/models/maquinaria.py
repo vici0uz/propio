@@ -30,6 +30,7 @@ class maquina(models.Model):
     def launch_wizard(self):
         for record in self:
             view = self.env.ref('maquinaria.wizard')
+            # print(col.red('ALAN DEBUG: ' + str(self.env.context['tipo'])))
             return {
                 'type': 'ir.actions.act_window',
                 'name': 'Registrar trabajo',
@@ -40,6 +41,7 @@ class maquina(models.Model):
                 'target': 'new',
                 'context': {
                     'current_id': self.id,
+                    # 'default_tipo': 'open'
                 }
             }
 
@@ -81,6 +83,7 @@ class maquinaria_trabajo(models.Model):
     operador = fields.Many2one(comodel_name='res.partner')
     fecha_trabajo = fields.Date(default=fields.Date.context_today, string="Fecha")
     cerrado = fields.Boolean(default=False)
+    status = fields.Selection([('abierto', 'Abierto'), ('mitad', 'Mitad'), ('cerrado', 'Cerrado')], default='abierto')
 
     # Apertura
     odometro_inicial = fields.Integer()
@@ -92,49 +95,12 @@ class maquinaria_trabajo(models.Model):
     horas_trabajadas = fields.Float()
     notas = fields.Text(string='Description')
 
-class maquinaria_wizard(models.TransientModel):
-    _name = 'maquinaria.wizard'
 
-    maquina_id = fields.Many2one(comodel_name='maquinaria.maquina', ondelete='restrict')
+    # Nuevos
 
-    trabajo_destino = fields.Many2one(comodel_name='maquinaria.destino', string='Lugar')
-    operador = fields.Many2one(comodel_name='res.partner')
-    fecha_trabajo = fields.Date(default=fields.Date.context_today, string="Fecha")
-
-
-    # Apertura
-    odometro_inicial = fields.Integer()
-    odometro_inicial_imagen = fields.Binary(string='Odometro inicial', attachment=True)
-
-    # Final
-    odometro_final = fields.Integer()
-    odometro_final_imagen = fields.Binary(string='Odometro final', attachment=True)
-    horas_trabajadas = fields.Float()
-    notas = fields.Text(string='Description')
-
-    @api.multi
-    def guardar_datos(self):
-        for record in self:
-            if self.env.context['current_id']:
-                maquina = self.env['maquinaria.maquina'].browse(self.env.context['current_id'])
-                if record.odometro < maquina.ultimo_odometro:
-                    raise UserError('¡El odometro no puede ser inferior al anterior trabajo!')
-                linea_data = {
-                    'odometro': record.odometro,
-                    'odometro_imagen': record.odometro_imagen,
-                    'fecha_trabajo': record.fecha_trabajo,
-                    'operador': record.operador.id,
-                    'trabajo_destino': record.trabajo_destino.id
-                }
-                maquina.browse(self.env.context['current_id']).write({
-                    'ultimo_odometro': record.odometro,
-                    'ultimo_lugar': record.trabajo_destino.id,
-                    'ultimo_operador': record.operador.id,
-                    'ultima_foto_odometro': record.odometro_imagen,
-                    'trabajo_lineas_ids': [(0, 0, linea_data)]
-                    })
-
-# class res_partner(models.Model):
-#     _inherit = 'res.partner'
-
-#     horas_trabajadas =
+    tiene_observacion = fields.Boolean()
+    observacion = fields.Text()
+    descripcion = fields.Text()
+    combustible = fields.Float()
+    hora_inicio = fields.Datetime()
+    hora_final = fields.Datetime()

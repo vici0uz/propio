@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+
     <data>
         <record id="wizard" model="ir.ui.view">
             <field name="name">maquinaria.trabajo.wizard</field>
@@ -11,10 +12,11 @@
                             <field name="fecha_trabajo" required="1"/>
                             <field name="trabajo_destino" required="1" options="{'no_create':True}"/>
                             <field name="operador" required="1" options="{'no_create':True}"/>
+                            <field name="tipo"/>
                         </group>
                         <group>
-                            <!-- <field name="odometro" required="1"/>
-                            <field name="odometro_imagen" required="1"/> -->
+                            <field name="odometro"/>
+                            <field name="odometro_imagen"/>
                         </group>
                     </group>
                     <footer>
@@ -24,5 +26,6 @@
                 </form>
             </field>
         </record>
+
     </data>
 </odoo>

@@ -2,8 +2,13 @@ from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 from clint.textui import colored as col
 
+
 class maquinaria_wizard(models.TransientModel):
     _name = 'maquinaria.wizard'
+
+    def _get_default_tipo(self):
+        print(col.red('ALAN DEBUG: ' + str(self.env.context['tipo'])))
+        return self.env.context['tipo']
 
     maquina_id = fields.Many2one(comodel_name='maquinaria.maquina', ondelete='restrict')
 
@@ -13,29 +18,42 @@ class maquinaria_wizard(models.TransientModel):
 
 
     # Apertura
-    odometro_inicial = fields.Integer()
-    odometro_inicial_imagen = fields.Binary(string='Odometro inicial', attachment=True)
+    odometro = fields.Integer()
+    odometro_imagen = fields.Binary(string='Odometro inicial', attachment=True)
 
-    # Final
-    odometro_final = fields.Integer()
-    odometro_final_imagen = fields.Binary(string='Odometro final', attachment=True)
+
     horas_trabajadas = fields.Float()
     notas = fields.Text(string='Description')
+
+    tipo = fields.Selection([('open', 'Abierto'), ('closed', 'Cerrado')], string='Tipo', default=_get_default_tipo)
+
+
 
     @api.multi
     def guardar_datos(self):
         for record in self:
             if self.env.context['current_id']:
                 maquina = self.env['maquinaria.maquina'].browse(self.env.context['current_id'])
-                if record.odometro < maquina.ultimo_odometro:
-                    raise UserError('¡El odometro no puede ser inferior al anterior trabajo!')
-                linea_data = {
-                    'odometro': record.odometro,
-                    'odometro_imagen': record.odometro_imagen,
-                    'fecha_trabajo': record.fecha_trabajo,
-                    'operador': record.operador.id,
-                    'trabajo_destino': record.trabajo_destino.id
-                }
+                if self.env.context['tipo'] == 'closed':
+                    # CIERRE
+                    # print(col.red('ALAN DEBUG: ' + str('me pasan que sí papu')))
+                    if record.odometro_final < maquina.ultimo_odometro:
+                        raise UserError('¡El odometro no puede ser inferior al anterior registro')
+                        ultimo_turno = self.env['maquinaria.trabajo.linea'].search([])[-1]
+                        vals = {
+                            'odometro_final': record.odometro,
+                            'odometro_final_imagen': record.odometro_imagen,
+                            'cerrado': True
+                        }
+                        ultimo_turno.write(vals)
+                else:
+                    linea_data = {
+                        'odometro_inicial': record.odometro,
+                        'odometro_inicial_imagen': record.odometro_imagen,
+                        'fecha_trabajo': record.fecha_trabajo,
+                        'operador': record.operador.id,
+                        'trabajo_destino': record.trabajo_destino.id
+                    }
                 maquina.browse(self.env.context['current_id']).write({
                     'ultimo_odometro': record.odometro,
                     'ultimo_lugar': record.trabajo_destino.id,

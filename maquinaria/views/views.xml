@@ -9,8 +9,8 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="launch_wizard" type="object" string="Registrar inicio" class="oe_highlight"/>
-                        <button name="launch_wizard" type="object" string="Registrar final" class="oe_highlight" context="{'close':True}"/>
+                        <button name="launch_wizard" type="object" string="Registrar inicio" class="oe_highlight" context="{'tipo':'open'}"/>
+                        <button name="launch_wizard" type="object" string="Registrar final" class="oe_highlight" context="{'tipo':'closed'}" />
                     </header>
                     <sheet>
 
