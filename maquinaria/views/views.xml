@@ -243,11 +243,14 @@
 
 
                             <group>
+
+                                <field name="hora_inicio"/>
                                 <field name="odometro_inicial"/>
                                 <field name="odometro_inicial_imagen" widget="image"/>
 
                             </group>
                             <group>
+                                <field name="hora_final"/>
                                 <field name="odometro_final"/>
                                 <field name="odometro_final_imagen" widget="image"/>
                             </group>

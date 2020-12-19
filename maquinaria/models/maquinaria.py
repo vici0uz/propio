@@ -78,8 +78,6 @@ class maquinaria_trabajo(models.Model):
     _name = 'maquinaria.trabajo.linea'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-
-
     @api.multi
     @api.depends('maquina_id', 'operador', 'trabajo_destino')
     def _set_name(self):
