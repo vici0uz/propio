@@ -43,6 +43,10 @@
                             </page>
                         </notebook>
                     </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
                 </form>
             </field>
         </record>
@@ -161,7 +165,9 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <field name="name"/>
+                        <h1>
+                            <field name="name" style="width:25%%" required="1"/>
+                        </h1>
                     </sheet>
                 </form>
             </field>
@@ -198,18 +204,82 @@
             <field name="name">maquinaria.trabajo.tree</field>
             <field name="model">maquinaria.trabajo.linea</field>
             <field name="arch" type="xml">
-                <tree string="Trabajos" editable="top" default_order="fecha_trabajo asc">
+                <tree string="Trabajos" default_order="fecha_trabajo asc" create="0"  delete="false" decoration-danger="tiene_observacion == True">
                     <field name="operador" required="1" domain="[('is_company','=',False)]"/>
+                    <field name="maquina_id"/>
                     <field name="trabajo_destino" required="1"/>
                     <field name="fecha_trabajo" required="1"/>
+                    <field name="tiene_observacion" invisible="1"/>
                 </tree>
             </field>
         </record>
 
+        <record id="maquinaria_trabajo_form" model="ir.ui.view">
+            <field name="name">maquinaria.trabajo.form</field>
+            <field name="model">maquinaria.trabajo.linea</field>
+            <field name="arch" type="xml">
+                <form duplicate="false" delete="false" create="false" edit="false">
+                    <header>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="operador"/>
+                            </h1>
+                            <h3>
+                                <field name="maquina_id"/>
+                            </h3>
+                            <h3>
+                                <field name="trabajo_destino"/>
+                            </h3>
+                        </div>
+                        <group >
+                            <group colspan="2">
+                                <field name="horas_trabajadas"  class="oe_inline"/>
+                                <field name="combustible" class="oe_inline"/>
+
+                            </group>
+
+
+                            <group>
+                                <field name="odometro_inicial"/>
+                                <field name="odometro_inicial_imagen" widget="image"/>
+
+                            </group>
+                            <group>
+                                <field name="odometro_final"/>
+                                <field name="odometro_final_imagen" widget="image"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Trabajo">
+                                <field name="descripcion"/>
+                                <field name="tiene_observacion" invisible="1"/>
+                                <field name="observacion" attrs="{'invisible':[('tiene_observacion','=',False)]}"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="maquinaria_trabajo_act" model="ir.actions.act_window">
+            <field name="name">Turnos</field>
+            <field name="res_model">maquinaria.trabajo.linea</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
         <!-- MENUS -->
         <menuitem id="maquinaria_menu_root" name="Maquinaria" web_icon="maquinaria,static/description/maquinaria.png" sequence="40"/>
 
         <menuitem id="maquinaria_menu_level1" parent="maquinaria_menu_root" name="Registros"/>
+        <menuitem id="maquinaria_turno" parent="maquinaria_menu_level1" action="maquinaria_trabajo_act"/>
         <menuitem id="maquinaria_menu_level2" parent="maquinaria_menu_level1" action="maquinaria_maquina_act"/>
 
         <menuitem id="maquinaria_menu_maquina_marca" parent="maquinaria_menu_level1" action="maquinaria_marca_act"/>

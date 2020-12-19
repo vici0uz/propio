@@ -5,7 +5,8 @@ from clint.textui import colored as col
 
 class maquina(models.Model):
     _name = 'maquinaria.maquina'
-
+    # _inherits = ['mail.thread', 'ir.action.need']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     active = fields.Boolean(default=True)
     responsable = fields.Many2one(comodel_name='res.partner')
     name = fields.Char(compute='_set_name', store=True)
@@ -75,10 +76,27 @@ class maquina_destino(models.Model):
 
 class maquinaria_trabajo(models.Model):
     _name = 'maquinaria.trabajo.linea'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
+
+
+    @api.multi
+    @api.depends('maquina_id', 'operador', 'trabajo_destino')
+    def _set_name(self):
+        for record in self:
+            if not(record.operador):
+                print(col.red('ALAN DEBUG: ' + str('joder operador')))
+            if not(record.maquina_id.name):
+                print(col.red('ALAN DEBUG: '+ str('joser maquina')))
+            if not(record.trabajo_destino):
+                print(col.red('ALAN DEBUG: ' + str('joder lugar')))
+            record.name = record.operador.name + '/ ' + record.maquina_id.name + ' - ' +record.trabajo_destino.name
+
+    # name = fields.Char(compute='_set_name', store=True)
+    name = fields.Char()
     maquina_id = fields.Many2one(comodel_name='maquinaria.maquina', ondelete='restrict')
     trabajo_destino = fields.Many2one(comodel_name='maquinaria.destino', string='Lugar', ondelete='restrict')
-    operador = fields.Many2one(comodel_name='res.partner', ondelete='restrict')
+    operador = fields.Many2one(comodel_name='res.partner', ondelete='restrict', string='Operador')
     fecha_trabajo = fields.Date(default=fields.Date.context_today, string="Fecha")
     cerrado = fields.Boolean(default=False)
     status = fields.Selection([('abierto', 'Abierto'), ('cerrado', 'Cerrado')], default='abierto')
