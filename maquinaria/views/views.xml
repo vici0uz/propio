@@ -222,6 +222,7 @@
                 <form duplicate="false" delete="false" create="false" edit="false">
                     <header>
                         <field name="status" widget="statusbar"/>
+                        <button name="devel" type="object" string="Devel"/>
                     </header>
                     <sheet>
                         <div class="oe_title">
@@ -237,7 +238,7 @@
                         </div>
                         <group >
                             <group colspan="2">
-                                <field name="horas_trabajadas"  class="oe_inline"/>
+                                <field name="horas_trabajadas_str"  class="oe_inline"/>
                                 <field name="combustible" class="oe_inline" attrs="{'invisible':[('combustible','=',0)]}"/>
                             </group>
 

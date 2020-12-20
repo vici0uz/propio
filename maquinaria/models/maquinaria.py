@@ -1,7 +1,7 @@
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError
 from clint.textui import colored as col
-
+from datetime import datetime, timedelta
 
 class maquina(models.Model):
     _name = 'maquinaria.maquina'
@@ -106,7 +106,8 @@ class maquinaria_trabajo(models.Model):
     # Final
     odometro_final = fields.Float(digits=(16, 1))
     odometro_final_imagen = fields.Binary(string='Odometro final', attachment=True)
-    horas_trabajadas = fields.Float()
+    horas_trabajadas = fields.Float(compute='_calcular_horas')
+    horas_trabajadas_str = fields.Char(compute='_calcular_horas', string="Horas trabajadas")
     notas = fields.Text(string='Description')
 
     # Nuevos
@@ -117,3 +118,29 @@ class maquinaria_trabajo(models.Model):
     combustible = fields.Float()
     hora_inicio = fields.Datetime()
     hora_final = fields.Datetime()
+
+    km_diferencia = fields.Float(compute='devel')
+
+    @api.multi
+    def devel(self):
+        for record in self:
+            if (record.odometro_inicial and record.odometro_final):
+                res = (record.odometro_final - record.odometro_inicial)
+                record.km_diferencia = res
+
+
+
+    @api.depends('hora_inicio', 'hora_final')
+    @api.multi
+    def _calcular_horas(self):
+        for record in self:
+            if (record.hora_inicio and record.hora_final):
+                fecha1 = datetime.strptime(record.hora_inicio, '%Y-%m-%d %H:%M:%S')
+                fecha2 = datetime.strptime(record.hora_final,  '%Y-%m-%d %H:%M:%S')
+
+                res = fecha2 - fecha1
+                horas = datetime.strptime(str(res), '%H:%M:%S')
+                hora_str = "{hora}.{minuto}".format(hora=horas.hour, minuto=horas.minute)
+                hora_decimal = float(hora_str)
+                record.horas_trabajadas = hora_decimal
+                record.horas_trabajadas_str = "{hora}:{minuto}".format(hora=horas.hour, minuto=horas.minute)
