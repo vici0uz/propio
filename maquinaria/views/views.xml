@@ -204,11 +204,12 @@
             <field name="name">maquinaria.trabajo.tree</field>
             <field name="model">maquinaria.trabajo.linea</field>
             <field name="arch" type="xml">
-                <tree string="Trabajos" default_order="fecha_trabajo asc" create="0"  delete="false" decoration-danger="tiene_observacion == True">
+                <tree string="Trabajos" default_order="hora_inicio desc" create="0"  delete="false" decoration-danger="tiene_observacion == True">
                     <field name="operador" required="1" domain="[('is_company','=',False)]"/>
                     <field name="maquina_id"/>
                     <field name="trabajo_destino" required="1"/>
                     <field name="fecha_trabajo" required="1"/>
+                    <field name="hora_inicio" invisible="1"/>
                     <field name="tiene_observacion" invisible="1"/>
                 </tree>
             </field>
@@ -237,19 +238,16 @@
                         <group >
                             <group colspan="2">
                                 <field name="horas_trabajadas"  class="oe_inline"/>
-                                <field name="combustible" class="oe_inline"/>
-
+                                <field name="combustible" class="oe_inline" attrs="{'invisible':[('combustible','=',0)]}"/>
                             </group>
 
-
-                            <group>
-
+                            <group string="Inicio">
                                 <field name="hora_inicio"/>
                                 <field name="odometro_inicial"/>
                                 <field name="odometro_inicial_imagen" widget="image"/>
-
                             </group>
-                            <group>
+
+                            <group string="Final">
                                 <field name="hora_final"/>
                                 <field name="odometro_final"/>
                                 <field name="odometro_final_imagen" widget="image"/>

@@ -100,11 +100,11 @@ class maquinaria_trabajo(models.Model):
     status = fields.Selection([('abierto', 'Abierto'), ('cerrado', 'Cerrado')], default='abierto')
 
     # Apertura
-    odometro_inicial = fields.Float()
+    odometro_inicial = fields.Float(digits=(16, 1))
     odometro_inicial_imagen = fields.Binary(string='Odometro inicial', attachment=True)
 
     # Final
-    odometro_final = fields.Float()
+    odometro_final = fields.Float(digits=(16, 1))
     odometro_final_imagen = fields.Binary(string='Odometro final', attachment=True)
     horas_trabajadas = fields.Float()
     notas = fields.Text(string='Description')
