@@ -3,10 +3,11 @@ from odoo.exceptions import UserError
 from clint.textui import colored as col
 from datetime import datetime, timedelta
 
+
 class maquina(models.Model):
     _name = 'maquinaria.maquina'
-    # _inherits = ['mail.thread', 'ir.action.need']
     _inherit = ['mail.thread', 'mail.activity.mixin']
+
     active = fields.Boolean(default=True)
     responsable = fields.Many2one(comodel_name='res.partner')
     name = fields.Char(compute='_set_name', store=True)
@@ -79,13 +80,13 @@ class maquinaria_trabajo(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     @api.multi
-    @api.depends('maquina_id', 'operador', 'trabajo_destino')
+    @api.depends('maquina_id', 'operario', 'trabajo_destino')
     def _set_name(self):
         for record in self:
             if not(record.operador):
                 print(col.red('ALAN DEBUG: ' + str('joder operador')))
             if not(record.maquina_id.name):
-                print(col.red('ALAN DEBUG: '+ str('joser maquina')))
+                print(col.red('ALAN DEBUG: ' + str('joser maquina')))
             if not(record.trabajo_destino):
                 print(col.red('ALAN DEBUG: ' + str('joder lugar')))
             record.name = record.operador.name + '/ ' + record.maquina_id.name + ' - ' +record.trabajo_destino.name
@@ -94,7 +95,9 @@ class maquinaria_trabajo(models.Model):
     name = fields.Char()
     maquina_id = fields.Many2one(comodel_name='maquinaria.maquina', ondelete='restrict')
     trabajo_destino = fields.Many2one(comodel_name='maquinaria.destino', string='Lugar', ondelete='restrict')
-    operador = fields.Many2one(comodel_name='res.partner', ondelete='restrict', string='Operador')
+    # operador = fields.Many2one(comodel_name='res.partner', ondelete='restrict', string='Operador')
+
+    operario = fields.Many2one(comodel_name='res.partner', ondelete='restrict', string='Operario')
     fecha_trabajo = fields.Date(default=fields.Date.context_today, string="Fecha")
     cerrado = fields.Boolean(default=False)
     status = fields.Selection([('abierto', 'Abierto'), ('cerrado', 'Cerrado')], default='abierto')
@@ -119,16 +122,14 @@ class maquinaria_trabajo(models.Model):
     hora_inicio = fields.Datetime()
     hora_final = fields.Datetime()
 
-    km_diferencia = fields.Float(compute='devel')
+    km_diferencia = fields.Float(compute='_calcular_km', string="Cuenta odometro")
 
     @api.multi
-    def devel(self):
+    def _calcular_km(self):
         for record in self:
             if (record.odometro_inicial and record.odometro_final):
                 res = (record.odometro_final - record.odometro_inicial)
                 record.km_diferencia = res
-
-
 
     @api.depends('hora_inicio', 'hora_final')
     @api.multi

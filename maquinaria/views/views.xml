@@ -205,7 +205,7 @@
             <field name="model">maquinaria.trabajo.linea</field>
             <field name="arch" type="xml">
                 <tree string="Trabajos" default_order="hora_inicio desc" create="0"  delete="false" decoration-danger="tiene_observacion == True">
-                    <field name="operador" required="1" domain="[('is_company','=',False)]"/>
+                    <field name="operario" domain="[('is_company','=',False)]"/>
                     <field name="maquina_id"/>
                     <field name="trabajo_destino" required="1"/>
                     <field name="fecha_trabajo" required="1"/>
@@ -227,7 +227,7 @@
                     <sheet>
                         <div class="oe_title">
                             <h1>
-                                <field name="operador"/>
+                                <!-- <field name="operador"/> -->
                             </h1>
                             <h3>
                                 <field name="maquina_id"/>
@@ -238,6 +238,7 @@
                         </div>
                         <group >
                             <group colspan="2">
+                                <field name="km_diferencia" attrs="{'invisible':[('km_diferencia','&lt;=',0)]}"/>
                                 <field name="horas_trabajadas_str"  class="oe_inline"/>
                                 <field name="combustible" class="oe_inline" attrs="{'invisible':[('combustible','=',0)]}"/>
                             </group>
@@ -246,16 +247,19 @@
                                 <field name="hora_inicio"/>
                                 <field name="odometro_inicial"/>
                                 <field name="odometro_inicial_imagen" widget="image"/>
+                                <!-- <field name="odometro_inicial_imagen"/> -->
                             </group>
 
                             <group string="Final">
                                 <field name="hora_final"/>
                                 <field name="odometro_final"/>
                                 <field name="odometro_final_imagen" widget="image"/>
+                                <!-- <field name="odometro_final_imagen"/> -->
                             </group>
                         </group>
                         <notebook>
-                            <page string="Trabajo">
+                            <page string="Trabajo" attrs="{'invisible':[('descripcion','=',False)]}">
+                                <label for="descripcion"/>
                                 <field name="descripcion"/>
                                 <field name="tiene_observacion" invisible="1"/>
                                 <field name="observacion" attrs="{'invisible':[('tiene_observacion','=',False)]}"/>
@@ -281,13 +285,13 @@
         <menuitem id="maquinaria_menu_root" name="Maquinaria" web_icon="maquinaria,static/description/maquinaria.png" sequence="40"/>
 
         <menuitem id="maquinaria_menu_level1" parent="maquinaria_menu_root" name="Registros"/>
-        <menuitem id="maquinaria_turno" parent="maquinaria_menu_level1" action="maquinaria_trabajo_act"/>
         <menuitem id="maquinaria_menu_level2" parent="maquinaria_menu_level1" action="maquinaria_maquina_act"/>
+        <menuitem id="maquinaria_turno" parent="maquinaria_menu_level1" action="maquinaria_trabajo_act" sequence="10"/>
 
-        <menuitem id="maquinaria_menu_maquina_marca" parent="maquinaria_menu_level1" action="maquinaria_marca_act"/>
+        <menuitem id="maquinaria_menu_maquina_marca" parent="maquinaria_menu_level1" action="maquinaria_marca_act" sequence="70"/>
 
-        <menuitem id="maquinaria_menu_maquina_modelo" parent="maquinaria_menu_level1" action="maquinaria_modelo_act"/>
+        <menuitem id="maquinaria_menu_maquina_modelo" parent="maquinaria_menu_level1" action="maquinaria_modelo_act" sequence="80"/>
 
-        <menuitem id="maquinaria_menu_destino" parent="maquinaria_menu_level1" action="maquinaria_destino_act"/>
+        <menuitem id="maquinaria_menu_destino" parent="maquinaria_menu_level1" action="maquinaria_destino_act" sequence="90"/>
     </data>
 </odoo>
