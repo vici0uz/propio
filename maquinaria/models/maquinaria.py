@@ -16,14 +16,16 @@ class maquina(models.Model):
     no_serie = fields.Char(string='Nro de serie', required=True)
 
     # Computados
-    ultimo_trabajo = fields.Many2one(comodel_name='maquinaria.trabajo.linea', compute='devel', store=True)
+    ultimo_trabajo = fields.Many2one(comodel_name='maquinaria.trabajo.linea', compute='set_stats', store=True)
     ultimo_odometro = fields.Float(default=0.0)
     ultimo_lugar = fields.Many2one(comodel_name='maquinaria.destino')
     ultimo_operador = fields.Many2one(comodel_name='res.partner')
     ultima_foto_odometro = fields.Binary()
 
+
+    @api.depends('trabajo_lineas_ids')
     @api.multi
-    def devel(self):
+    def set_stats(self):
         for record in self:
             ultimo_trabajo = record.trabajo_lineas_ids[-1]
             record.ultimo_trabajo = ultimo_trabajo
@@ -35,8 +37,6 @@ class maquina(models.Model):
                 if record.ultimo_odometro < record.ultimo_trabajo.odometro_final:
                     record.ultimo_odometro = record.ultimo_trabajo.odometro_final
                     record.ultima_foto_odometro = record.ultimo_trabajo.odometro_final_imagen
-
-
 
     @api.multi
     @api.depends('modelo', 'no_serie')
@@ -98,22 +98,16 @@ class maquinaria_trabajo(models.Model):
     @api.depends('maquina_id', 'operario', 'trabajo_destino')
     def _set_name(self):
         for record in self:
-            if not(record.operador):
-                print(col.red('ALAN DEBUG: ' + str('joder operador')))
-            if not(record.maquina_id.name):
-                print(col.red('ALAN DEBUG: ' + str('joser maquina')))
-            if not(record.trabajo_destino):
-                print(col.red('ALAN DEBUG: ' + str('joder lugar')))
-            record.name = record.operador.name + '/ ' + record.maquina_id.name + ' - ' +record.trabajo_destino.name
+            record.name = record.operario.name + '/ ' + record.maquina_id.name + ' - ' +record.trabajo_destino.name
 
-    # name = fields.Char(compute='_set_name', store=True)
-    name = fields.Char()
+    name = fields.Char(compute='_set_name', store=True)
+    # name = fields.Char()
     maquina_id = fields.Many2one(comodel_name='maquinaria.maquina', ondelete='restrict')
     trabajo_destino = fields.Many2one(comodel_name='maquinaria.destino', string='Lugar', ondelete='restrict')
     # operador = fields.Many2one(comodel_name='res.partner', ondelete='restrict', string='Operador')
 
-    operario = fields.Many2one(comodel_name='res.partner', ondelete='restrict', string='Operario')
-    fecha_trabajo = fields.Date(default=fields.Date.context_today, string="Fecha")
+    operario = fields.Many2one(comodel_name='res.partner', string='Operario', compute='set_operario', store=True)
+    fecha_trabajo = fields.Date(string="Fecha")
     cerrado = fields.Boolean(default=False)
     status = fields.Selection([('abierto', 'Abierto'), ('cerrado', 'Cerrado')], default='abierto')
 
@@ -160,3 +154,10 @@ class maquinaria_trabajo(models.Model):
                 hora_decimal = float(hora_str)
                 record.horas_trabajadas = hora_decimal
                 record.horas_trabajadas_str = "{hora}:{minuto}".format(hora=horas.hour, minuto=horas.minute)
+
+    @api.depends('create_uid')
+    @api.multi
+    def set_operario(self):
+        for record in self:
+            user = self.env['res.users'].browse(record.create_uid.id)
+            record.operario = user.partner_id.id

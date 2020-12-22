@@ -40,7 +40,7 @@
                         </div>
                         <label for="responsable"/>
                         <field name="responsable"/>
-                        <group colspan="4">
+                        <group colspan="4" attrs="{'invisible':[('trabajo_lineas_ids','=',[])]}">
                             <group>
                                 <field name="ultimo_operador" readonly="1"/>
                                 <field name="ultimo_lugar" readonly="1"/>
@@ -95,7 +95,7 @@
                 <form>
                     <sheet>
                         <h1>
-                            <label for="name"/>
+                            <label for="name" class="oe_edit_only"/>
                             <field name="name" class="oe_inline"/>
                         </h1>
                     </sheet>
@@ -134,10 +134,13 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
+                        <h1>
                         <field name="name" class="oe_readonly"/>
-                        <field name="marca_id" required="1"/>
-                        <field name="model_name" required="1"/>
-
+                        </h1>
+                        <group colspan="4">
+                        <field name="model_name" required="1" style="width:25%%"/>
+                        <field name="marca_id" required="1" style="width:25%%"/>
+                        </group>
                     </sheet>
                 </form>
             </field>
@@ -194,7 +197,7 @@
         </record>
 
         <record id="maquinaria_destino_act" model="ir.actions.act_window">
-            <field name="name">Destino</field>
+            <field name="name">Localidad</field>
             <field name="res_model">maquinaria.destino</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
