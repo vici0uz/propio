@@ -3,17 +3,30 @@
     <data>
 
     <!-- MAQUINA -->
+        <record id="maquinaria_maquina_tree" model="ir.ui.view">
+            <field name="name">maquinaria.maquina.tree</field>
+            <field name="model">maquinaria.maquina</field>
+            <field name="arch" type="xml">
+                <tree string="Maquinaria">
+                    <field name="modelo"/>
+                    <field name="no_serie"/>
+                    <field name="ultimo_lugar"/>
+                    <field name="ultimo_odometro"/>
+                </tree>
+            </field>
+        </record>
+
         <record id="maquinaria_maquina_form" model="ir.ui.view">
             <field name="name">maquinaria.maquina.form</field>
             <field name="model">maquinaria.maquina</field>
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="launch_wizard" type="object" string="Registrar inicio" class="oe_highlight" context="{'tipo':'open'}"/>
-                        <button name="launch_wizard" type="object" string="Registrar final" class="oe_highlight" context="{'tipo':'closed'}" />
+                        <!-- <button name="launch_wizard" type="object" string="Registrar inicio" class="oe_highlight" context="{'tipo':'open'}"/> -->
+                        <!-- <button name="launch_wizard" type="object" string="Registrar final" class="oe_highlight" context="{'tipo':'closed'}" /> -->
+                        <button name="devel" type="object" string="DEVEL"/>
                     </header>
                     <sheet>
-
                         <div class="oe_title">
                         <h1>
                             <label for="no_serie" class="oe_edit_only"/>
@@ -29,17 +42,24 @@
                         <field name="responsable"/>
                         <group colspan="4">
                             <group>
-                                <field name="ultimo_operador"/>
-                                <field name="ultimo_lugar"/>
+                                <field name="ultimo_operador" readonly="1"/>
+                                <field name="ultimo_lugar" readonly="1"/>
                             </group>
                             <group>
-                                <field name="ultimo_odometro"/>
-                                <field name="ultima_foto_odometro" widget='image'/>
+                                <field name="ultimo_odometro" readonly="1"/>
+                                <field name="ultima_foto_odometro" widget="image" readonly="1"/>
                             </group>
                         </group>
                         <notebook>
-                            <page string="Trabajos">
-                                <field name="trabajo_lineas_ids"/>
+                            <page string="Trabajos" attrs="{'invisible':[('trabajo_lineas_ids','=',[])]}">
+                                <field name="trabajo_lineas_ids" readonly="1">
+                                    <tree default_order="fecha_trabajo desc">
+                                        <field name="trabajo_destino"/>
+                                        <field name="operario"/>
+                                        <field name="fecha_trabajo"/>
+                                    </tree>
+                                </field>
+
                             </page>
                         </notebook>
                     </sheet>
@@ -48,16 +68,6 @@
                         <field name="activity_ids" widget="mail_activity"/>
                     </div>
                 </form>
-            </field>
-        </record>
-
-        <record id="maquinaria_maquina_tree" model="ir.ui.view">
-            <field name="name">maquinaria.maquina.tree</field>
-            <field name="model">maquinaria.maquina</field>
-            <field name="arch" type="xml">
-                <tree string="Maquinaria" editable="top">
-                    <field name="modelo"/>
-                </tree>
             </field>
         </record>
 
@@ -173,12 +183,12 @@
             </field>
         </record>
 
-        <record id="maquinaria_maquina_tree" model="ir.ui.view">
+        <record id="maquinaria_destino_tree" model="ir.ui.view">
             <field name="name">maquinaria.destino.tree</field>
             <field name="model">maquinaria.destino</field>
             <field name="arch" type="xml">
-                <tree string="Lugar de trabajo">
-                    <field name="name"/>
+                <tree string="Lugar de trabajo" editable="top">
+                    <field name="name" required="1"/>
                 </tree>
             </field>
         </record>
@@ -188,8 +198,6 @@
             <field name="res_model">maquinaria.destino</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <!-- <field name="arch" type="xml">
-            </field> -->
             <field name="help" type="html">
               <p class="o_view_nocontent_smiling_face">
                 Registrar un nuevo lugar de trabajo

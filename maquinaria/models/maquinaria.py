@@ -16,10 +16,27 @@ class maquina(models.Model):
     no_serie = fields.Char(string='Nro de serie', required=True)
 
     # Computados
-    ultimo_odometro = fields.Integer()
+    ultimo_trabajo = fields.Many2one(comodel_name='maquinaria.trabajo.linea', compute='devel', store=True)
+    ultimo_odometro = fields.Float(default=0.0)
     ultimo_lugar = fields.Many2one(comodel_name='maquinaria.destino')
     ultimo_operador = fields.Many2one(comodel_name='res.partner')
     ultima_foto_odometro = fields.Binary()
+
+    @api.multi
+    def devel(self):
+        for record in self:
+            ultimo_trabajo = record.trabajo_lineas_ids[-1]
+            record.ultimo_trabajo = ultimo_trabajo
+            if record.ultimo_trabajo:
+                if record.ultimo_odometro < record.ultimo_trabajo.odometro_inicial:
+                    record.ultimo_odometro = record.ultimo_trabajo.odometro_inicial
+                    record.ultima_foto_odometro = record.ultimo_trabajo.odometro_inicial_imagen
+                    record.ultimo_lugar = record.ultimo_trabajo.trabajo_destino.id
+                if record.ultimo_odometro < record.ultimo_trabajo.odometro_final:
+                    record.ultimo_odometro = record.ultimo_trabajo.odometro_final
+                    record.ultima_foto_odometro = record.ultimo_trabajo.odometro_final_imagen
+
+
 
     @api.multi
     @api.depends('modelo', 'no_serie')
@@ -32,7 +49,6 @@ class maquina(models.Model):
     def launch_wizard(self):
         for record in self:
             view = self.env.ref('maquinaria.wizard')
-            # print(col.red('ALAN DEBUG: ' + str(self.env.context['tipo'])))
             return {
                 'type': 'ir.actions.act_window',
                 'name': 'Registrar trabajo',
@@ -43,7 +59,6 @@ class maquina(models.Model):
                 'target': 'new',
                 'context': {
                     'current_id': self.id,
-                    # 'default_tipo': 'open'
                 }
             }
 
