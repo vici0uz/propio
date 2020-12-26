@@ -24,12 +24,12 @@
                     <header>
                         <!-- <button name="launch_wizard" type="object" string="Registrar inicio" class="oe_highlight" context="{'tipo':'open'}"/> -->
                         <!-- <button name="launch_wizard" type="object" string="Registrar final" class="oe_highlight" context="{'tipo':'closed'}" /> -->
-                        <button name="devel" type="object" string="DEVEL"/>
+                        <!-- <button name="devel" type="object" string="DEVEL"/> -->
                     </header>
                     <sheet>
                         <div class="oe_title">
                         <h1>
-                            <label for="no_serie" class="oe_edit_only"/>
+                            <label for="no_serie" />
                             <field name="no_serie" required="1" class="oe_inline"/>
                         </h1>
                         <h2>
@@ -53,7 +53,7 @@
                         <notebook>
                             <page string="Trabajos" attrs="{'invisible':[('trabajo_lineas_ids','=',[])]}">
                                 <field name="trabajo_lineas_ids" readonly="1">
-                                    <tree default_order="fecha_trabajo desc">
+                                    <tree default_order="fecha_trabajo desc, id desc">
                                         <field name="trabajo_destino"/>
                                         <field name="operario"/>
                                         <field name="fecha_trabajo"/>

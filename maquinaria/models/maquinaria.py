@@ -17,26 +17,32 @@ class maquina(models.Model):
 
     # Computados
     ultimo_trabajo = fields.Many2one(comodel_name='maquinaria.trabajo.linea', compute='set_stats', store=True)
-    ultimo_odometro = fields.Float(default=0.0)
-    ultimo_lugar = fields.Many2one(comodel_name='maquinaria.destino')
-    ultimo_operador = fields.Many2one(comodel_name='res.partner')
-    ultima_foto_odometro = fields.Binary()
+    ultimo_odometro = fields.Float(default=0.0, compute='set_stats', store=True)
+    ultimo_lugar = fields.Many2one(comodel_name='maquinaria.destino', compute='set_stats', store=True)
+    ultimo_operador = fields.Many2one(comodel_name='res.partner', compute='set_stats', store=True)
+    ultima_foto_odometro = fields.Binary(compute='set_stats', store=True)
 
 
     @api.depends('trabajo_lineas_ids')
     @api.multi
     def set_stats(self):
         for record in self:
+            print(col.red('ALAN DEBUG: ' + str('detectado escritura')))
             ultimo_trabajo = record.trabajo_lineas_ids[-1]
-            record.ultimo_trabajo = ultimo_trabajo
+            print(col.red('ALAN DEBUG: ' + str(ultimo_trabajo.id)))
+            record.ultimo_trabajo = ultimo_trabajo.id
             if record.ultimo_trabajo:
                 if record.ultimo_odometro < record.ultimo_trabajo.odometro_inicial:
                     record.ultimo_odometro = record.ultimo_trabajo.odometro_inicial
                     record.ultima_foto_odometro = record.ultimo_trabajo.odometro_inicial_imagen
                     record.ultimo_lugar = record.ultimo_trabajo.trabajo_destino.id
+                    record.ultimo_operador = record.ultimo_trabajo.operario.id
                 if record.ultimo_odometro < record.ultimo_trabajo.odometro_final:
                     record.ultimo_odometro = record.ultimo_trabajo.odometro_final
                     record.ultima_foto_odometro = record.ultimo_trabajo.odometro_final_imagen
+                    record.ultimo_operador = record.ultimo_trabajo.operario.id
+                    record.ultimo_lugar = record.ultimo_trabajo.trabajo_destino.id
+
 
     @api.multi
     @api.depends('modelo', 'no_serie')
