@@ -140,6 +140,8 @@ class maquinaria_trabajo(models.Model):
     km_diferencia = fields.Float(compute='_calcular_km', string="Cuenta odometro")
 
     pagado = fields.Boolean(default=False)
+    fecha_pago = fields.Datetime()
+    pagador_id = fields.Many2one(comodel_name='res.partner')
 
     @api.multi
     def _calcular_km(self):
@@ -174,6 +176,18 @@ class maquinaria_trabajo(models.Model):
 class res_partner(models.Model):
     _inherit = 'res.partner'
 
+    trabajo_ids = fields.Many2one(comodel_name='maquinaria.trabajo.linea', inverse_name='partner_id', string='Trabajos')
+    trabajos_sin_pagar = fields.Integer(compute='_count_trabajos', default=0, store=True)
+
+    @api.depends('trabajo_ids')
+    @api.multi
+    def _count_trabajos(self):
+        for record in self:
+            trabajos = self.env['maquinaria.trabajo.linea'].search(['&',('pagado','=',False),('operario','=', record.id)])
+            count = len(trabajos)
+            if count != 0:
+                record.trabajos_sin_pagar = count
+
     @api.multi
     def action_ver_trabajos_operario(self):
         for record in self:
@@ -185,7 +199,8 @@ class res_partner(models.Model):
                 'view_type': 'form',
                 'view_mode': 'tree,form',
                 'context': {
-                    'search_default_operario': record.id
+                    'search_default_operario': record.id,
+                    'search_default_filter_no_pagado':1
                 }
             }
 

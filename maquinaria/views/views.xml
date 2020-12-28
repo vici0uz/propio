@@ -9,6 +9,12 @@
             <field name="arch" type="xml">
                 <div name="button_box" position="inside">
                     <button type="object" class="oe_stat_button" icon="fa-pencil-square-o" name="action_ver_trabajos_operario" context="{'default_partner_id': active_id}">
+                        <div class="o_form_field o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="trabajos_sin_pagar"/>
+                            </span>
+                            <span class="o_stat_text">Trabajos sin pagar</span>
+                        </div>
                     </button>
                 </div>
             </field>
@@ -229,6 +235,7 @@
             <field name="arch" type="xml">
                 <search string="Filtrar turnos">
                     <field name="operario"/>
+                    <filter name="no_pagado" string="No pagado" domain="(['pagado', '=', False])"/>
                     <group expand="0" string="Agrupar por">
 
                         <filter name="group_by_operario" string="Operario" context="{'group_by': 'operario'}"/>
