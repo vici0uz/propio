@@ -2,6 +2,18 @@
 <odoo>
     <data>
 
+        <record id="res_partner_maquinaria_inh" model="ir.ui.view">
+            <field name="name">maquinaria.res.partner</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button type="object" class="oe_stat_button" icon="fa-pencil-square-o" name="action_ver_trabajos_operario" context="{'default_partner_id': active_id}">
+                    </button>
+                </div>
+            </field>
+        </record>
+
     <!-- MAQUINA -->
         <record id="maquinaria_maquina_tree" model="ir.ui.view">
             <field name="name">maquinaria.maquina.tree</field>
@@ -211,6 +223,21 @@
         </record>
 
     <!-- TRABAJO -->
+        <record id="maquinaria_trabajo_search" model="ir.ui.view">
+            <field name="name">maquinaria.trabajo.search</field>
+            <field name="model">maquinaria.trabajo.linea</field>
+            <field name="arch" type="xml">
+                <search string="Filtrar turnos">
+                    <field name="operario"/>
+                    <group expand="0" string="Agrupar por">
+
+                        <filter name="group_by_operario" string="Operario" context="{'group_by': 'operario'}"/>
+                        <filter name="group_by_maquina" string="Maquina" context="{'group_by': 'maquina_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
         <record id="maquinaria_trabajo_tree" model="ir.ui.view">
             <field name="name">maquinaria.trabajo.tree</field>
             <field name="model">maquinaria.trabajo.linea</field>

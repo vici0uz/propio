@@ -139,6 +139,8 @@ class maquinaria_trabajo(models.Model):
 
     km_diferencia = fields.Float(compute='_calcular_km', string="Cuenta odometro")
 
+    pagado = fields.Boolean(default=False)
+
     @api.multi
     def _calcular_km(self):
         for record in self:
@@ -167,3 +169,24 @@ class maquinaria_trabajo(models.Model):
         for record in self:
             user = self.env['res.users'].browse(record.create_uid.id)
             record.operario = user.partner_id.id
+
+
+class res_partner(models.Model):
+    _inherit = 'res.partner'
+
+    @api.multi
+    def action_ver_trabajos_operario(self):
+        for record in self:
+            vista = {
+                'type': 'ir.actions.act_window',
+                'name': 'Trabajos',
+                'target': 'self',
+                'res_model': 'maquinaria.trabajo.linea',
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'context': {
+                    'search_default_operario': record.id
+                }
+            }
+
+            return vista
