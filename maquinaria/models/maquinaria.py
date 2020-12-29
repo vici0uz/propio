@@ -172,36 +172,19 @@ class maquinaria_trabajo(models.Model):
             user = self.env['res.users'].browse(record.create_uid.id)
             record.operario = user.partner_id.id
 
-
-class res_partner(models.Model):
-    _inherit = 'res.partner'
-
-    trabajo_ids = fields.Many2one(comodel_name='maquinaria.trabajo.linea', inverse_name='partner_id', string='Trabajos')
-    trabajos_sin_pagar = fields.Integer(compute='_count_trabajos', default=0, store=True)
-
-    @api.depends('trabajo_ids')
     @api.multi
-    def _count_trabajos(self):
+    def pagar(self):
+        operario = self[0].operario.id
         for record in self:
-            trabajos = self.env['maquinaria.trabajo.linea'].search(['&',('pagado','=',False),('operario','=', record.id)])
-            count = len(trabajos)
-            if count != 0:
-                record.trabajos_sin_pagar = count
+            print(col.red('ALAN DEBUG: ' + str(record.pagado)))
+            if record.operario.id != operario:
+                raise UserError("Solo puede pagar a un operario a la vez!")
+            message = ("Pagado el %s, por %s") % (fields.Date.today(), self.env.user.name)
+            record.message_post(body=message, type="notification", subtype="mt_comment")
 
-    @api.multi
-    def action_ver_trabajos_operario(self):
-        for record in self:
-            vista = {
-                'type': 'ir.actions.act_window',
-                'name': 'Trabajos',
-                'target': 'self',
-                'res_model': 'maquinaria.trabajo.linea',
-                'view_type': 'form',
-                'view_mode': 'tree,form',
-                'context': {
-                    'search_default_operario': record.id,
-                    'search_default_filter_no_pagado':1
-                }
-            }
+class maquinaria_combustible_carga(models.Model):
+    _name = 'maquinaria.combustible.carga'
 
-            return vista
+    maquina_id = fields.Many2one(comodel_name='maquinaria.maquina')
+    cantidad = fields.Float()
+    fecha_carga = fields.Date()

@@ -1,1 +1,1 @@
-from . import maquinaria
+from . import maquinaria, partner
