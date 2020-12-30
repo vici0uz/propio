@@ -22,14 +22,18 @@ class maquina(models.Model):
     ultimo_operador = fields.Many2one(comodel_name='res.partner', compute='set_stats', store=True)
     ultima_foto_odometro = fields.Binary(compute='set_stats', store=True)
 
+    # NUevos
+    carga_combustible_ids = fields.One2many(comodel_name='maquinaria.combustible.carga', inverse_name='maquina_id')
+    intervalo_mantenimiento = fields.Integer()
+    siguiente_manteniento = fields.Integer()
+    estado_mantenimiento = fields.Selection([('pendiente', 'Pendiente'), ('en_curso', 'Mantenimiento en curso'), ('ok', 'Mantinimiento al día')])
+    mantenimiento_ids = fields.One2many(comodel_name='maquinaria.mantenimiento', inverse_name='maquina_id')
 
     @api.depends('trabajo_lineas_ids')
     @api.multi
     def set_stats(self):
         for record in self:
-            print(col.red('ALAN DEBUG: ' + str('detectado escritura')))
             ultimo_trabajo = record.trabajo_lineas_ids[-1]
-            print(col.red('ALAN DEBUG: ' + str(ultimo_trabajo.id)))
             record.ultimo_trabajo = ultimo_trabajo.id
             if record.ultimo_trabajo:
                 if record.ultimo_odometro < record.ultimo_trabajo.odometro_inicial:
@@ -42,7 +46,6 @@ class maquina(models.Model):
                     record.ultima_foto_odometro = record.ultimo_trabajo.odometro_final_imagen
                     record.ultimo_operador = record.ultimo_trabajo.operario.id
                     record.ultimo_lugar = record.ultimo_trabajo.trabajo_destino.id
-
 
     @api.multi
     @api.depends('modelo', 'no_serie')
@@ -182,9 +185,18 @@ class maquinaria_trabajo(models.Model):
             message = ("Pagado el %s, por %s") % (fields.Date.today(), self.env.user.name)
             record.message_post(body=message, type="notification", subtype="mt_comment")
 
+
 class maquinaria_combustible_carga(models.Model):
     _name = 'maquinaria.combustible.carga'
 
     maquina_id = fields.Many2one(comodel_name='maquinaria.maquina')
     cantidad = fields.Float()
     fecha_carga = fields.Date()
+    fecha_hora = fields.Datetime()
+
+
+class maquinaria_mantenimiento(models.Model):
+    _name = 'maquinaria.mantenimiento'
+
+    maquina_id = fields.Many2one(comodel_name='maquinaria.maquina')
+    fecha_mantenimiento = fields.Datetime()

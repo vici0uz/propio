@@ -50,7 +50,7 @@
             <field name="name">maquinaria.maquina.form</field>
             <field name="model">maquinaria.maquina</field>
             <field name="arch" type="xml">
-                <form>
+                <form duplicate="0">
                     <header>
                         <!-- <button name="launch_wizard" type="object" string="Registrar inicio" class="oe_highlight" context="{'tipo':'open'}"/> -->
                         <!-- <button name="launch_wizard" type="object" string="Registrar final" class="oe_highlight" context="{'tipo':'closed'}" /> -->
@@ -83,10 +83,14 @@
                         <notebook>
                             <page string="Trabajos" attrs="{'invisible':[('trabajo_lineas_ids','=',[])]}">
                                 <field name="trabajo_lineas_ids" readonly="1">
-                                    <tree default_order="fecha_trabajo desc, id desc">
+                                    <tree default_order="fecha_trabajo desc, id desc" decoration-danger="tiene_observacion" decoration-muted="pagado">
                                         <field name="trabajo_destino"/>
                                         <field name="operario"/>
                                         <field name="fecha_trabajo"/>
+                                        <field name="odometro_final"/>
+                                        <field name="horas_trabajadas_str" class="oe_right"/>
+                                        <field name="tiene_observacion" invisible="1"/>
+                                        <field name="pagado" invisible="1"/>
                                     </tree>
                                 </field>
 
