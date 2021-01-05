@@ -95,6 +95,15 @@
                                 </field>
 
                             </page>
+                            <page string="Combustible">
+                                <field name="carga_combustible_ids" readonly="1">
+                                    <tree>
+                                        <field name="fecha_carga"/>
+                                        <field name="cantidad"/>
+                                    </tree>
+                                </field>
+                            </page>
+
                         </notebook>
                     </sheet>
                     <div class="oe_chatter">

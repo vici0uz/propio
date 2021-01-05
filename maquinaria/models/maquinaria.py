@@ -33,19 +33,20 @@ class maquina(models.Model):
     @api.multi
     def set_stats(self):
         for record in self:
-            ultimo_trabajo = record.trabajo_lineas_ids[-1]
-            record.ultimo_trabajo = ultimo_trabajo.id
-            if record.ultimo_trabajo:
-                if record.ultimo_odometro < record.ultimo_trabajo.odometro_inicial:
-                    record.ultimo_odometro = record.ultimo_trabajo.odometro_inicial
-                    record.ultima_foto_odometro = record.ultimo_trabajo.odometro_inicial_imagen
-                    record.ultimo_lugar = record.ultimo_trabajo.trabajo_destino.id
-                    record.ultimo_operador = record.ultimo_trabajo.operario.id
-                if record.ultimo_odometro < record.ultimo_trabajo.odometro_final:
-                    record.ultimo_odometro = record.ultimo_trabajo.odometro_final
-                    record.ultima_foto_odometro = record.ultimo_trabajo.odometro_final_imagen
-                    record.ultimo_operador = record.ultimo_trabajo.operario.id
-                    record.ultimo_lugar = record.ultimo_trabajo.trabajo_destino.id
+            if record.trabajo_lineas_ids:
+                ultimo_trabajo = record.trabajo_lineas_ids[-1]
+                record.ultimo_trabajo = ultimo_trabajo.id
+                if record.ultimo_trabajo:
+                    if record.ultimo_odometro < record.ultimo_trabajo.odometro_inicial:
+                        record.ultimo_odometro = record.ultimo_trabajo.odometro_inicial
+                        record.ultima_foto_odometro = record.ultimo_trabajo.odometro_inicial_imagen
+                        record.ultimo_lugar = record.ultimo_trabajo.trabajo_destino.id
+                        record.ultimo_operador = record.ultimo_trabajo.operario.id
+                    if record.ultimo_odometro < record.ultimo_trabajo.odometro_final:
+                        record.ultimo_odometro = record.ultimo_trabajo.odometro_final
+                        record.ultima_foto_odometro = record.ultimo_trabajo.odometro_final_imagen
+                        record.ultimo_operador = record.ultimo_trabajo.operario.id
+                        record.ultimo_lugar = record.ultimo_trabajo.trabajo_destino.id
 
     @api.multi
     @api.depends('modelo', 'no_serie')
@@ -179,7 +180,6 @@ class maquinaria_trabajo(models.Model):
     def pagar(self):
         operario = self[0].operario.id
         for record in self:
-            print(col.red('ALAN DEBUG: ' + str(record.pagado)))
             if record.operario.id != operario:
                 raise UserError("Solo puede pagar a un operario a la vez!")
             message = ("Pagado el %s, por %s") % (fields.Date.today(), self.env.user.name)
@@ -191,7 +191,7 @@ class maquinaria_combustible_carga(models.Model):
 
     maquina_id = fields.Many2one(comodel_name='maquinaria.maquina')
     cantidad = fields.Float()
-    fecha_carga = fields.Date()
+    fecha_carga = fields.Date(string="Fecha")
     fecha_hora = fields.Datetime()
 
 
