@@ -97,7 +97,8 @@
                             </page>
                             <page string="Combustible">
                                 <field name="carga_combustible_ids" readonly="1">
-                                    <tree>
+                                    <tree default_order="id desc">
+                                        <field name="operario_id"/>
                                         <field name="fecha_carga"/>
                                         <field name="cantidad"/>
                                     </tree>

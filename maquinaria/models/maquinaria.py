@@ -189,10 +189,19 @@ class maquinaria_trabajo(models.Model):
 class maquinaria_combustible_carga(models.Model):
     _name = 'maquinaria.combustible.carga'
 
-    maquina_id = fields.Many2one(comodel_name='maquinaria.maquina')
+    maquina_id = fields.Many2one(comodel_name='maquinaria.maquina', string='Maquina')
+    operario_id = fields.Many2one(comodel_name='res.partner', string='Operario', compute='set_operario', store=True)
     cantidad = fields.Float()
     fecha_carga = fields.Date(string="Fecha")
     fecha_hora = fields.Datetime()
+
+    @api.multi
+    @api.depends('create_uid')
+    def set_operario(self):
+        print(col.red('ALAN DEBUG: ' + str('llamado operario')))
+        for record in self:
+            user = self.env['res.users'].browse(record.create_uid.id)
+            record.operario_id = user.partner_id.id
 
 
 class maquinaria_mantenimiento(models.Model):
