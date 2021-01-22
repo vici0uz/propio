@@ -92,6 +92,12 @@ class formulario_pagar(models.TransientModel):
         print(col.red('ALAN DEBUG: ' + str(type(fecha))))
         self.horas_trabajadas = fecha.hour
 
+    @api.multi
+    def guardar_datos(self):
+        for record in self:
+            for trabajo in record.trabajo_ids:
+                trabajo.write({'pagado': True, 'fecha_pago': fields.Date.today()})
+                trabajo.registrar_pago()
 
     trabajo_ids = fields.Many2many(comodel_name='maquinaria.trabajo.linea', relation='wizard_rel', column1='uno', column2='dos', default=_get_turnos_ids)
     horas_trabajadas = fields.Float(compute='_calcular_horas')

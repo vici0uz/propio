@@ -199,7 +199,11 @@ class maquinaria_trabajo(models.Model):
             # message = ("Pagado el %s, por %s") % (fields.Date.today(), self.env.user.name)
             # record.message_post(body=message, type="notification", subtype="mt_comment")
 
-
+    @api.multi
+    def registrar_pago(self):
+        for record in self:
+            message = ("Pagado el %s, por %s") % (fields.Date.today(), self.env.user.name)
+            record.message_post(body=message, type="notification", subtype="mt_comment")
 
 class maquinaria_combustible_carga(models.Model):
     _name = 'maquinaria.combustible.carga'
