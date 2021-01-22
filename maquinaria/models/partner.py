@@ -6,7 +6,7 @@ class res_partner(models.Model):
     _inherit = 'res.partner'
 
     trabajo_ids = fields.Many2one(comodel_name='maquinaria.trabajo.linea', inverse_name='partner_id', string='Trabajos')
-    trabajos_sin_pagar = fields.Integer(compute='_count_trabajos', default=0, store=True)
+    trabajos_sin_pagar = fields.Integer(compute='_count_trabajos', default=0)
 
     @api.depends('trabajo_ids.pagado')
     @api.multi

@@ -2,7 +2,7 @@
 <odoo>
 
     <data>
-        <record id="wizard" model="ir.ui.view">
+        <!-- <record id="wizard" model="ir.ui.view">
             <field name="name">maquinaria.trabajo.wizard</field>
             <field name="model">maquinaria.wizard</field>
             <field name="arch" type="xml">
@@ -20,6 +20,25 @@
                         </group>
                     </group>
                     <footer>
+                        <button string="Guardar" name="guardar_datos" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record> -->
+
+        <record id="wizard" model="ir.ui.view">
+            <field name="name">maquinaria.pago.wizard</field>
+            <field name="model">maquinaria.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="horas_trabajadas"/>
+                    <notebook>
+                        <page string="Trabajos">
+                            <field name="trabajo_ids"/>
+                        </page>
+                    </notebook>
+                     <footer>
                         <button string="Guardar" name="guardar_datos" type="object" class="btn-primary"/>
                         <button string="Cancel" class="btn-default" special="cancel"/>
                     </footer>

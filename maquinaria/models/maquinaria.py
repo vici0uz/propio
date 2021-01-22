@@ -182,8 +182,23 @@ class maquinaria_trabajo(models.Model):
         for record in self:
             if record.operario.id != operario:
                 raise UserError("Solo puede pagar a un operario a la vez!")
-            message = ("Pagado el %s, por %s") % (fields.Date.today(), self.env.user.name)
-            record.message_post(body=message, type="notification", subtype="mt_comment")
+            view = self.env.ref('maquinaria.wizard')
+            return {
+                'type': 'ir.actions.act_window',
+                'name': 'Registrar trabajo',
+                'res_model': 'maquinaria.wizard',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'view_id': view.id,
+                'target': 'new',
+                'context': {
+                    'jeje': self.ids
+                }
+            }
+
+            # message = ("Pagado el %s, por %s") % (fields.Date.today(), self.env.user.name)
+            # record.message_post(body=message, type="notification", subtype="mt_comment")
+
 
 
 class maquinaria_combustible_carga(models.Model):
