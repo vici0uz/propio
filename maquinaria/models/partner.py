@@ -12,7 +12,7 @@ class res_partner(models.Model):
     @api.multi
     def _count_trabajos(self):
         for record in self:
-            trabajos = self.env['maquinaria.trabajo.linea'].search(['&',('pagado','=',False),('operario','=', record.id)])
+            trabajos = self.env['maquinaria.trabajo.linea'].search(['&', '&', ('cerrado', '=', True), ('pagado', '=', False), ('operario', '=', record.id)])
             count = len(trabajos)
             if count != 0:
                 record.trabajos_sin_pagar = count
@@ -27,6 +27,7 @@ class res_partner(models.Model):
                 'res_model': 'maquinaria.trabajo.linea',
                 'view_type': 'form',
                 'view_mode': 'tree,form',
+                'domain': [('cerrado', '=', True)],
                 'context': {
                     'search_default_operario': record.id,
                     'search_default_filter_no_pagado': 1
