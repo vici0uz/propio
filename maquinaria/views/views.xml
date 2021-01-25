@@ -354,9 +354,18 @@
             <field name="context">"{'group_by':['operario']}"</field>
 
         </record>
+
+        <record id="maquinaria_operario_act" model="ir.actions.act_window">
+            <field name="name">Operarios</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context"></field>
+        </record>
         <!-- MENUS -->
         <menuitem id="maquinaria_menu_root" name="Maquinaria" web_icon="maquinaria,static/description/maquinaria.png" sequence="40"/>
 
+        <menuitem id="maquinaria_operador" parent="maquinaria_menu_level1" name="Operarios" action="maquinaria_operario_act"/>
         <menuitem id="maquinaria_menu_level1" parent="maquinaria_menu_root" name="Registros"/>
         <menuitem id="maquinaria_menu_level2" parent="maquinaria_menu_level1" action="maquinaria_maquina_act"/>
         <menuitem id="maquinaria_turno" parent="maquinaria_menu_level1" action="maquinaria_trabajo_act" sequence="10"/>

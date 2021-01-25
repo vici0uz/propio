@@ -2,7 +2,8 @@
     'name': 'Maquinaria (KB)',
     'depends': [
         'base',
-        'bi_sql_editor'
+        'bi_sql_editor',
+        'mail'
         ],
     'data': [
         'security/ir.model.access.csv',
