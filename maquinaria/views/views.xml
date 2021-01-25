@@ -365,9 +365,10 @@
         <!-- MENUS -->
         <menuitem id="maquinaria_menu_root" name="Maquinaria" web_icon="maquinaria,static/description/maquinaria.png" sequence="40"/>
 
-        <menuitem id="maquinaria_operador" parent="maquinaria_menu_level1" name="Operarios" action="maquinaria_operario_act"/>
+
         <menuitem id="maquinaria_menu_level1" parent="maquinaria_menu_root" name="Registros"/>
         <menuitem id="maquinaria_menu_level2" parent="maquinaria_menu_level1" action="maquinaria_maquina_act"/>
+         <menuitem id="maquinaria_operador" parent="maquinaria_menu_level1" name="Operarios" action="maquinaria_operario_act"/>
         <menuitem id="maquinaria_turno" parent="maquinaria_menu_level1" action="maquinaria_trabajo_act" sequence="10"/>
 
         <menuitem id="maquinaria_menu_maquina_marca" parent="maquinaria_menu_level1" action="maquinaria_marca_act" sequence="70"/>
