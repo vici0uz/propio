@@ -22,12 +22,13 @@ class maquina(models.Model):
     ultimo_operador = fields.Many2one(comodel_name='res.partner', compute='set_stats', store=True)
     ultima_foto_odometro = fields.Binary(compute='set_stats', store=True)
 
-    # NUevos
     carga_combustible_ids = fields.One2many(comodel_name='maquinaria.combustible.carga', inverse_name='maquina_id')
-    intervalo_mantenimiento = fields.Integer()
-    siguiente_manteniento = fields.Integer()
+    intervalo_mantenimiento = fields.Float()
+    siguiente_manteniento = fields.Float()
     estado_mantenimiento = fields.Selection([('pendiente', 'Pendiente'), ('en_curso', 'Mantenimiento en curso'), ('ok', 'Mantinimiento al día')])
     mantenimiento_ids = fields.One2many(comodel_name='maquinaria.mantenimiento', inverse_name='maquina_id')
+
+    # Nuevos
 
     @api.depends('trabajo_lineas_ids')
     @api.multi
@@ -218,7 +219,6 @@ class maquinaria_combustible_carga(models.Model):
     @api.multi
     @api.depends('create_uid')
     def set_operario(self):
-        print(col.red('ALAN DEBUG: ' + str('llamado operario')))
         for record in self:
             user = self.env['res.users'].browse(record.create_uid.id)
             record.operario_id = user.partner_id.id
@@ -229,3 +229,4 @@ class maquinaria_mantenimiento(models.Model):
 
     maquina_id = fields.Many2one(comodel_name='maquinaria.maquina')
     fecha_mantenimiento = fields.Datetime()
+    marca_odometro = fields.Float()

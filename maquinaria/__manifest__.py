@@ -3,7 +3,8 @@
     'depends': [
         'base',
         'bi_sql_editor',
-        'mail'
+        'mail',
+        'hooks'
         ],
     'data': [
         'security/ir.model.access.csv',
